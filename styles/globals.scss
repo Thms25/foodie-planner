@@ -1,0 +1,13 @@
+:root {
+  --white: #FAF0E4;
+  --blue: #9BCDD2;
+  --orange: #FF8551;
+  --pink: #FFDEDE;
+}
+
+body {
+  background-color: var(--white);
+  color: var(--orange);
+  text-align: center;
+  margin: 0;
+}

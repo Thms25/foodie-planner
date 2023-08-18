@@ -1,0 +1,12 @@
+.recipes {
+  display: flex;
+  overflow: scroll;
+  a {
+    text-decoration: none;
+    color: var(--orange);
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

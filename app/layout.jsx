@@ -1,14 +1,18 @@
-import "./globals.css";
+import Navbar from "@/components/Navbar";
+import '../styles/globals.scss'
 
 export const metadata = {
-  title: "Foodie PLanner",
+  title: "Foodie Planner",
   description: "Plan your best meals with foodie planner",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
