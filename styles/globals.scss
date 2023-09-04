@@ -1,13 +1,13 @@
 :root {
-  --white: #FAF0E4;
-  --blue: #9BCDD2;
-  --orange: #FF8551;
-  --pink: #FFDEDE;
+  --white: #FFF8DE;
+  --blue: #D6E8DB;
+  --grey: #C1D0B5;
+  --green: #99A98F;
 }
 
 body {
   background-color: var(--white);
-  color: var(--orange);
+  color: var(--green);
   text-align: center;
   margin: 0;
 }

@@ -5,7 +5,6 @@ import styles from '../styles/calendar.module.scss';
 const HomeCalendar = () => {
   return (
     <div className={styles.homeCalendar}>
-      Calendar arriving soon
       <Calendar />
     </div>
   );
