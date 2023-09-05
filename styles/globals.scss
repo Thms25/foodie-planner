@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Didact+Gothic&display=swap');
+
 :root {
   --white: #FFF8DE;
   --blue: #D6E8DB;
   --grey: #C1D0B5;
   --green: #99A98F;
+
+  --titleFont: 'Caveat', cursive;
+  --mainFont: 'Didact Gothic', sans-serif;
 }
 
 body {
@@ -10,4 +15,5 @@ body {
   color: var(--green);
   text-align: center;
   margin: 0;
+  font-family: var(--mainFont);
 }
