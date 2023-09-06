@@ -5,4 +5,26 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
+  a {
+    font-family: var(--titleFont);
+    color: var(--white);
+  }
+  .searchBar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid white;
+    padding: 8px;
+    min-width: 20%;
+
+    .searchInput {
+      background-color: var(--green);
+      border: none;
+      padding: 8px 12px;
+      color: var(--white);
+    }
+  }
+  .userIcon {
+    font-size: 24px;
+  }
 }
