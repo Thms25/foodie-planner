@@ -29,5 +29,13 @@
     justify-content: space-around;
     align-items: center;
     border: 1px solid var(--grey);
+
+  }
+  .trashcan {
+    transition: 0.2s;
+
+    &:hover {
+      color: rgba(255, 0, 0, 0.5);
+    }
   }
 }

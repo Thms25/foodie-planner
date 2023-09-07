@@ -1,11 +1,15 @@
-.homeCalendar {
+@import 'react-big-calendar/lib/sass/styles';
+
+.rbc-calendar {
   margin: 24px;
   padding: 24px;
   border: 1px solid var(--grey);
-  height: 50vh;
+  // height: 50vh;
+  .rbc-event {
+    background-color: red;
+  }
 
-  * {
-    // background-color: var(--white);
-    padding: 8px;
+  .rbc-toolbar {
+    background-color: blue;
   }
 }

@@ -2,40 +2,23 @@
 
 import React, { useState } from 'react';
 import styles from '../styles/calendar.module.scss';
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
-// import format from 'date-fns/format'
-// import parse from 'date-fns/parse'
-// import startOfWeek from 'date-fns/startOfWeek'
-// import getDay from 'date-fns/getDay'
-// import enUS from 'date-fns/locale/en-US'
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-// const locales = {
-//   'en-US': enUS,
-// }
 
+const localizer = momentLocalizer(moment)
 
 const HomeCalendar = () => {
-  // const localizer = dateFnsLocalizer({
-  //   format,
-  //   parse,
-  //   startOfWeek,
-  //   getDay,
-  //   // locales,
-  // })
-
-  // const [date, setDate] = useState(new Date());
-  // const onChange = (date) => {
-  //   setDate(date)
-  // }
 
   return (
-    <div className={styles.homeCalendar}>
+    <div className={styles['rbc-calendar']}>
       <Calendar
-        // localizer={localizer}
+        localizer={localizer}
         // events={myEventsList}
-        // startAccessor="start"
-        // endAccessor="end"
-        // style={{ height: 500 }}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 500 }}
       />
     </div>
   );

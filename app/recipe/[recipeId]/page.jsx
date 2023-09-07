@@ -21,6 +21,8 @@ export default function Page ({ params }) {
   return (
     <div>
       <h1>This is {recipe.title}</h1>
+      <h3>{recipe.description}</h3>
+      <p>{recipe.rate}</p>
     </div>
   );
 }
