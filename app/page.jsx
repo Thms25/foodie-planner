@@ -1,6 +1,7 @@
 'use client';
 
 import Recipes from "@/components/Recipes";
+import NewRecipe from "@/components/NewRecipe";
 import styles from "../styles/home.module.scss";
 import Calendar from "@/components/HomeCalendar";
 import Image from "next/image";
@@ -25,6 +26,9 @@ export default function Home() {
           height={596}
           id={styles.bannerImage}
         />
+      </div>
+      <div>
+        <NewRecipe />
       </div>
       <div className={styles.recipes}>
         <h2>Browse through our most liked recipes...</h2>

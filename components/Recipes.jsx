@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import RecipeCard from './RecipeCard';
-import styles from '../styles/recipes.module.scss';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import RecipeCard from "./RecipeCard";
+import styles from "../styles/recipes.module.scss";
+import Link from "next/link";
 
 async function fetchRecipes() {
-  const res = await fetch("http://localhost:3000/api/v1/recipes");
+  const res = await fetch(process.env.NEXT_PUBLIC_RECIPES);
   return res.json();
 }
 
@@ -19,7 +19,7 @@ const Recipes = () => {
       setRecipes(myRecipes);
     }
     getRecipes();
-  }, [])
+  }, []);
 
   return (
     <div className={styles.recipes}>
@@ -37,10 +37,10 @@ const Recipes = () => {
               />
             </Link>
           </div>
-        )
+        );
       })}
     </div>
   );
-}
+};
 
 export default Recipes;
