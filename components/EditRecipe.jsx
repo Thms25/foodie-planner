@@ -4,52 +4,48 @@ import { useState } from 'react';
 import styles from 'styles/newRecipe.module.scss';
 import { useRouter } from 'next/navigation';
 
-export default function newRecipe() {
+export default function editRecipe({ recipe }) {
   const router = useRouter();
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('no description yet');
-  const [rate, setRate] = useState(5);
-  const [prep, setPrep] = useState(60);
-  const [servings, setServings] = useState(4);
-  const [category, setCategory] = useState('Italian');
+  const [editedRecipe, setEditedRecipe] = useState(recipe)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const recipeData = {
-      title,
-      description,
-      rate,
-      prep_time: prep,
-      servings,
-      category
-    }
-
-    const res = await fetch(process.env.NEXT_PUBLIC_RECIPES, {
-      method: 'POST',
+    const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${recipe.id}`, {
+      method: 'PUT',
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(recipeData)
+      body: JSON.stringify({
+        title: editedRecipe.title,
+        description: editedRecipe.description,
+        description: editedRecipe.description,
+        rate: editedRecipe.rate,
+        prep_time: editedRecipe.prep_time,
+        servings: editedRecipe.servings,
+        category: editedRecipe.category
+      })
     })
 
+    // console.log(res);
+
     if (res.ok) {
-      const { id } = await res.json();
-      router.push(`/recipe/${id}`)
+      console.log("form submitted succesfully !")
+      router.push(`/recipe/${recipe.id}`);
     } else {
       console.log('error')
     }
   }
   return (
     <div className={styles.newRecipe}>
-      <h1>Let's create your own recipe</h1>
+      <h1>Let's edit your recipe</h1>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <div>
           <label htmlFor="title">Recipe Title</label>
           <input
             id='title'
             type="text"
-            value={title}
-            onChange={ (e) => { setTitle(e.currentTarget.value) } }
+            value={editedRecipe.title}
+            onChange={ (e) => { setEditedRecipe({...editedRecipe, title: e.currentTarget.value }) } }
             required
           />
         </div>
@@ -58,8 +54,8 @@ export default function newRecipe() {
           <input
             id='description'
             type="textarea"
-            value={description}
-            onChange={(e) => {setDescription(e.currentTarget.value)}}
+            value={editedRecipe.description}
+            onChange={ (e) => { setEditedRecipe({...editedRecipe, description: e.currentTarget.value }) } }
             required
           />
         </div>
@@ -68,8 +64,8 @@ export default function newRecipe() {
           <input
             id='rate'
             type="number"
-            value={rate}
-            onChange={(e) => {setRate(e.currentTarget.value)}}
+            value={editedRecipe.rate}
+            onChange={ (e) => { setEditedRecipe({...editedRecipe, rate: e.currentTarget.value }) } }
             required
           />
         </div>
@@ -78,8 +74,8 @@ export default function newRecipe() {
           <input
             id='prep-time'
             type="number"
-            value={prep}
-            onChange={(e) => {setPrep(e.currentTarget.value)}}
+            value={editedRecipe.prep_time}
+            onChange={ (e) => { setEditedRecipe({...editedRecipe, prep_time: e.currentTarget.value }) } }
             required
           />
         </div>
@@ -88,8 +84,8 @@ export default function newRecipe() {
           <input
             id='servings'
             type="number"
-            value={servings}
-            onChange={(e) => {setServings(e.currentTarget.value)}}
+            value={editedRecipe.servings}
+            onChange={ (e) => { setEditedRecipe({...editedRecipe, servings: e.currentTarget.value }) } }
             required
           />
         </div>
@@ -98,12 +94,12 @@ export default function newRecipe() {
           <input
             id='category'
             type="text"
-            value={category}
-            onChange={(e) => {setCategory(e.currentTarget.value)}}
+            value={editedRecipe.category}
+            onChange={ (e) => { setEditedRecipe({...editedRecipe, category: e.currentTarget.value }) } }
             required
           />
         </div>
-        <button type="submit">Create Recipe</button>
+        <button type="submit">Edit Recipe</button>
       </form>
     </div>
   )

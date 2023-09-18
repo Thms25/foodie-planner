@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import RecipeCard from "./RecipeCard";
 import styles from "../styles/recipes.module.scss";
-import Link from "next/link";
 
 async function fetchRecipes() {
   const res = await fetch(process.env.NEXT_PUBLIC_RECIPES);
@@ -12,35 +11,36 @@ async function fetchRecipes() {
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     async function getRecipes() {
       const myRecipes = await fetchRecipes();
       setRecipes(myRecipes);
+      setIsLoading(false)
     }
     getRecipes();
   }, []);
 
   return (
-    <div className={styles.recipes}>
-      {recipes.map((recipe) => {
-        return (
-          <div key={recipe.id}>
-            <Link href={`/recipe/${recipe.id}`}>
-              <RecipeCard
-                title={recipe.title}
-                description={recipe.description}
-                rate={recipe.rate}
-                prep_time={recipe.prep_time}
-                servings={recipe.servings}
-                category={recipe.category}
-              />
-            </Link>
-          </div>
-        );
-      })}
-    </div>
-  );
+    <>
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div className={styles.recipes}>
+          {recipes.map((recipe) => {
+            return (
+              <div key={recipe.id}>
+                {/* <Link href={`/recipe/${recipe.id}`}> */}
+                  <RecipeCard recipe={recipe} />
+                {/* </Link> */}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </>
+  )
 };
 
 export default Recipes;
