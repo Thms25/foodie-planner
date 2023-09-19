@@ -8,23 +8,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, onDeleteRecipe }) => {
 
-  const deleteRecipe = async (id) => {
-    console.log("delete button pressed")
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`, {
-        method: 'DELETE',
-      })
-      if (res.ok) {
-        const resData = await res.json();
-        console.log(resData)
-      } else {
-        console.log('error', res)
-      }
-    } catch (error) {
-      console.error(error)
-    }
+  const deleteRecipe = (id) => {
+    onDeleteRecipe(id);
   }
 
   return (

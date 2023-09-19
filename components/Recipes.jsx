@@ -22,6 +22,21 @@ const Recipes = () => {
     getRecipes();
   }, []);
 
+  const handleDeleteRecipe = async (id) => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`, {
+        method: 'DELETE',
+      })
+      if (res.ok) {
+        setRecipes(recipes.filter((recipe) => recipe.id !== id));
+      } else {
+        throw res;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       {isLoading ? (
@@ -31,9 +46,7 @@ const Recipes = () => {
           {recipes.map((recipe) => {
             return (
               <div key={recipe.id}>
-                {/* <Link href={`/recipe/${recipe.id}`}> */}
-                  <RecipeCard recipe={recipe} />
-                {/* </Link> */}
+                <RecipeCard recipe={recipe} onDeleteRecipe={handleDeleteRecipe} />
               </div>
             );
           })}
