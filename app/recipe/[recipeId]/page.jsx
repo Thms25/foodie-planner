@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import styles from 'styles/recipePage.module.scss'
 import EditRecipe from "@/components/EditRecipe";
-
+import { useRouter } from 'next/navigation';
 
 async function fetchRecipe(id) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`)
@@ -13,6 +13,8 @@ async function fetchRecipe(id) {
 export default function Page ({ params }) {
   const [recipe, setRecipe] = useState({})
   const [edit, setEdit] = useState(false)
+
+  const router = useRouter();
 
   useEffect(() => {
     async function getRecipe() {
@@ -37,16 +39,34 @@ export default function Page ({ params }) {
     }
   }
 
+  const deleteRecipe =  async (id) => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`, {
+        method: 'DELETE',
+      })
+      if (res.ok) {
+        console.log("recipe deleted")
+        router.push('/');
+      } else {
+        console.log("error");
+        throw res;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div>
       <div className={styles.recipePage}>
-        <h1>This is {recipe.title}</h1>
+        <h1>{recipe.title}</h1>
         <h3>{recipe.description}</h3>
         <h3>{recipe.category}</h3>
         <p>{recipe.rate}</p>
         <p>{recipe.prep_time}</p>
         <p>{recipe.servings}</p>
         <button onClick={() => setEdit(true)}>EDIT</button>
+        <button onClick={() => deleteRecipe(recipe.id)}>DELETE</button>
       </div>
       {edit && (
         <EditRecipe recipe={recipe} editRecipe={handleEditRecipe} />
