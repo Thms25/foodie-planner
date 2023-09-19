@@ -11,7 +11,7 @@ async function fetchRecipe(id) {
 }
 
 export default function Page ({ params }) {
-  const [recipe, setRecipe] = useState([])
+  const [recipe, setRecipe] = useState({})
   const [edit, setEdit] = useState(false)
 
   useEffect(() => {
@@ -21,6 +21,21 @@ export default function Page ({ params }) {
     }
     getRecipe();
   }, []);
+
+  const handleEditRecipe = async (id, body) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`, {
+      method: 'PUT',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(body)
+    })
+    if (res.ok) {
+      console.log("form submitted succesfully !")
+      setRecipe(body)
+      setEdit(false)
+    } else {
+      console.log('error')
+    }
+  }
 
   return (
     <div>
@@ -34,10 +49,7 @@ export default function Page ({ params }) {
         <button onClick={() => setEdit(true)}>EDIT</button>
       </div>
       {edit && (
-        <div>
-          <EditRecipe recipe={recipe} />
-          <button onClick={() => setEdit(false)}>STOP EDIT</button>
-        </div>
+        <EditRecipe recipe={recipe} editRecipe={handleEditRecipe} />
       )}
     </div>
   );

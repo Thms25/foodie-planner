@@ -2,39 +2,24 @@
 
 import { useState } from 'react';
 import styles from 'styles/newRecipe.module.scss';
-import { useRouter } from 'next/navigation';
 
-export default function editRecipe({ recipe }) {
-  const router = useRouter();
-
+export default function editRecipe({ recipe, editRecipe }) {
   const [editedRecipe, setEditedRecipe] = useState(recipe)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${recipe.id}`, {
-      method: 'PUT',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        title: editedRecipe.title,
-        description: editedRecipe.description,
-        description: editedRecipe.description,
-        rate: editedRecipe.rate,
-        prep_time: editedRecipe.prep_time,
-        servings: editedRecipe.servings,
-        category: editedRecipe.category
-      })
-    })
-
-    // console.log(res);
-
-    if (res.ok) {
-      console.log("form submitted succesfully !")
-      router.push(`/recipe/${recipe.id}`);
-    } else {
-      console.log('error')
+    const body = {
+      title: editedRecipe.title,
+      description: editedRecipe.description,
+      description: editedRecipe.description,
+      rate: editedRecipe.rate,
+      prep_time: editedRecipe.prep_time,
+      servings: editedRecipe.servings,
+      category: editedRecipe.category
     }
+    editRecipe(recipe.id, body)
   }
+
   return (
     <div className={styles.newRecipe}>
       <h1>Let's edit your recipe</h1>
