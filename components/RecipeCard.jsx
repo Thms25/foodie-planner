@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from '../styles/recipeCard.module.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,29 +6,37 @@ import {
   faClock,
   faStar
 } from "@fortawesome/free-solid-svg-icons";
+import Link from 'next/link';
 
-const RecipeCard = (props) => {
+const RecipeCard = ({ recipe, onDeleteRecipe }) => {
+
+  const deleteRecipe = (id) => {
+    onDeleteRecipe(id);
+  }
+
   return (
     <div className={styles.recipe}>
-      <div className={styles.recipeHeader}>
-        <h2>{props.title}</h2>
-        <p>{props.description}</p>
-      </div>
-      <div className={styles.recipeData}>
-        <div>
-          <p>{props.rate}</p>
-          <FontAwesomeIcon icon={faStar} />
+      <Link href={`/recipe/${recipe.id}`}>
+        <div className={styles.recipeHeader}>
+          <h2>{recipe.title}</h2>
+          <p>{recipe.description}</p>
         </div>
-        <div>
-          <p>{props.prep_time}'</p>
-          <FontAwesomeIcon icon={faClock} />
+        <div className={styles.recipeData}>
+          <div>
+            <p>{recipe.rate}</p>
+            <FontAwesomeIcon icon={faStar} />
+          </div>
+          <div>
+            <p>{recipe.prep_time}'</p>
+            <FontAwesomeIcon icon={faClock} />
+          </div>
+          <div>
+            <p>{recipe.servings}</p>
+            <FontAwesomeIcon icon={faUserGroup} />
+          </div>
         </div>
-        <div>
-          <p>{props.servings}</p>
-          <FontAwesomeIcon icon={faUserGroup} />
-        </div>
-      </div>
-      <FontAwesomeIcon icon={faTrashCan} className={styles.trashcan} />
+      </Link>
+      <FontAwesomeIcon icon={faTrashCan} className={styles.trashcan} onClick={() => deleteRecipe(recipe.id)}/>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import styles from '../styles/navbar.module.scss';
 import Link from 'next/link';
@@ -6,12 +8,19 @@ import {
   faMagnifyingGlass,
   faUser
 } from "@fortawesome/free-solid-svg-icons";
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <Link href="/">
-        <h2>Foodie Planner</h2>
+        <motion.h2
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 3 }}
+        >
+          Foodie Planner
+        </motion.h2>
       </Link>
       <div className={styles.searchBar}>
         <FontAwesomeIcon icon={faMagnifyingGlass} />
