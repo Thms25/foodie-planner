@@ -17,17 +17,16 @@ const RecipeCard = ({ recipe, onDeleteRecipe }) => {
 
   return (
     <div className={styles.recipe}>
-      <p>{recipe.photo_url}</p>
       <Link href={`/recipe/${recipe.id}`}>
-        <Image
-          src={recipe.photo_url}
-          alt={recipe.title}
-          width={200}
-          height={300}
-        />
         <div className={styles.recipeHeader}>
+          <Image
+            src={recipe.photo_url}
+            alt={recipe.title}
+            width={300}
+            height={300}
+            className={styles.recipeImage}
+          />
           <h2>{recipe.title}</h2>
-          {/* <p>{recipe.description}</p> */}
         </div>
         <div className={styles.recipeData}>
           <div>
