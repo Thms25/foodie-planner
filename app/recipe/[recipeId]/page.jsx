@@ -59,26 +59,55 @@ export default function Page ({ params }) {
 
   return (
     <div>
-      <Image
-        src={recipe.photo_url}
-        alt={recipe.title}
-        width={300}
-        height={300}
-        className={styles.recipeImage}
-      />
       <div className={styles.recipePage}>
-        <h1>{recipe.title}</h1>
-        <h3>{recipe.description}</h3>
-        <h3>{recipe.category}</h3>
-        <p>{recipe.rate}</p>
-        <p>{recipe.prep_time}</p>
-        <p>{recipe.servings}</p>
-        <button onClick={() => setEdit(true)}>EDIT</button>
-        <button onClick={() => deleteRecipe(recipe.id)}>DELETE</button>
+        <div className={styles.recipeTop}>
+          <div className={styles.recipeInfo}>
+            <div className={styles.title}>
+              <h2>{recipe.title}</h2>
+              <p>{recipe.rate}</p>
+            </div>
+            <div className={styles.data}>
+              <p>{recipe.prep_time}</p>
+              <p>{recipe.servings}</p>
+            </div>
+            <div>
+              <ul>
+                <li>nutri <span>value</span></li>
+                <li>nutri <span>value</span></li>
+                <li>nutri <span>value</span></li>
+                <li>nutri <span>value</span></li>
+                <li>nutri <span>value</span></li>
+              </ul>
+            </div>
+          </div>
+          <Image
+            src={recipe.photo_url}
+            alt={recipe.title}
+            width={300}
+            height={300}
+            className={styles.recipeImage}
+            />
+        </div>
+        <div className={styles.recipeBot}>
+          <div className={styles.inregidents}>
+            <ul>
+              <li>test</li>
+              <li>test</li>
+              <li>test</li>
+              <li>test</li>
+              <li>test</li>
+            </ul>
+          </div>
+          <div className={styles.instructions}>
+            <p>{recipe.description}</p>
+          </div>
+        </div>
       </div>
       {edit && (
         <EditRecipe recipe={recipe} editRecipe={handleEditRecipe} />
-      )}
+        )}
     </div>
   );
 }
+{/* <button onClick={() => setEdit(true)}>EDIT</button>
+<button onClick={() => deleteRecipe(recipe.id)}>DELETE</button> */}
