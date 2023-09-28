@@ -72,9 +72,12 @@ export default function newRecipe({ handleClose }) {
         transition="trs"
         exit="exit"
       >
+        <div className={styles.cross}>
+          <p onClick={handleClose}>X</p>
+        </div>
         <h1>Let's create your own recipe</h1>
         <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-          <div>
+          <div className={styles.items}>
             <label htmlFor="title">Recipe Title</label>
             <input
               id='title'
@@ -84,7 +87,7 @@ export default function newRecipe({ handleClose }) {
               required
             />
           </div>
-          <div>
+          <div className={styles.items}>
             <label htmlFor="description">Recipe Description</label>
             <input
               id='description'
@@ -94,7 +97,7 @@ export default function newRecipe({ handleClose }) {
               required
             />
           </div>
-          <div>
+          <div className={styles.items}>
             <label htmlFor="rate">Recipe rate</label>
             <input
               id='rate'
@@ -104,7 +107,7 @@ export default function newRecipe({ handleClose }) {
               required
             />
           </div>
-          <div>
+          <div className={styles.items}>
             <label htmlFor="prep-time">Preparation time</label>
             <input
               id='prep-time'
@@ -114,7 +117,7 @@ export default function newRecipe({ handleClose }) {
               required
             />
           </div>
-          <div>
+          <div className={styles.fields}>
             <label htmlFor="servings">Servings</label>
             <input
               id='servings'
@@ -124,7 +127,7 @@ export default function newRecipe({ handleClose }) {
               required
             />
           </div>
-          <div>
+          <div className={styles.fields}>
             <label htmlFor="category">Food Category</label>
             <input
               id='category'
@@ -135,7 +138,6 @@ export default function newRecipe({ handleClose }) {
             />
           </div>
           <button type="submit">Create Recipe</button>
-          <button onClick={handleClose}>CLOSE</button>
         </form>
       </motion.div>
     </Backdrop>

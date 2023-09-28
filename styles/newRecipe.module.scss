@@ -9,5 +9,25 @@
 
   .form {
     padding: 8px;
+    text-align: left;
+    div {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 8px;
+    }
+
+    button {
+      max-width: 20%;
+      margin: 12px auto;
+    }
+  }
+
+  .cross {
+    display: flex;
+    justify-content: end;
+    margin: 0 auto;
+    p {
+      cursor: pointer;
+    }
   }
 }
