@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import styles from 'styles/recipePage.module.scss'
 import EditRecipe from "@/components/EditRecipe";
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 async function fetchRecipe(id) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`)
@@ -59,18 +60,54 @@ export default function Page ({ params }) {
   return (
     <div>
       <div className={styles.recipePage}>
-        <h1>{recipe.title}</h1>
-        <h3>{recipe.description}</h3>
-        <h3>{recipe.category}</h3>
-        <p>{recipe.rate}</p>
-        <p>{recipe.prep_time}</p>
-        <p>{recipe.servings}</p>
-        <button onClick={() => setEdit(true)}>EDIT</button>
-        <button onClick={() => deleteRecipe(recipe.id)}>DELETE</button>
+        <div className={styles.recipeLeft}>
+          <div className={styles.recipeInfo}>
+            <h2 className={styles.title}>{recipe.title}</h2>
+            <div className={styles.data}>
+              <p>preps: <span>{recipe.prep_time}</span></p>
+              <p>servings: <span>{recipe.servings}</span></p>
+              <p className='btn'>Add to calendar</p>
+            </div>
+            <div className={styles.nutritions}>
+              <ul>
+                <li>nutri <p>value</p></li>
+                <li>nutri <p>value</p></li>
+                <li>nutri <p>value</p></li>
+                <li>nutri <p>value</p></li>
+                <li>nutri <p>value</p></li>
+              </ul>
+            </div>
+          </div>
+          <div className={styles.inregidents}>
+            <h5>Ingredients</h5>
+            <ul>
+              <li>this is and ingredient - quantity</li>
+              <li>this is and ingredient - quantity</li>
+              <li>this is and ingredient - quantity</li>
+              <li>this is and ingredient - quantity</li>
+              <li>this is and ingredient - quantity</li>
+            </ul>
+          </div>
+        </div>
+        <div className={styles.recipeRight}>
+          <Image
+            src={recipe.photo_url}
+            alt={recipe.title}
+            width={480}
+            height={360}
+            className={styles.img}
+            />
+          <div className={styles.instructions}>
+            <h5>Instructions</h5>
+            <p>{recipe.description}</p>
+          </div>
+        </div>
       </div>
       {edit && (
         <EditRecipe recipe={recipe} editRecipe={handleEditRecipe} />
-      )}
+        )}
     </div>
   );
 }
+{/* <button onClick={() => setEdit(true)}>EDIT</button>
+<button onClick={() => deleteRecipe(recipe.id)}>DELETE</button> */}

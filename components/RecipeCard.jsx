@@ -7,6 +7,7 @@ import {
   faStar
 } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
+import Image from 'next/image';
 
 const RecipeCard = ({ recipe, onDeleteRecipe }) => {
 
@@ -18,8 +19,14 @@ const RecipeCard = ({ recipe, onDeleteRecipe }) => {
     <div className={styles.recipe}>
       <Link href={`/recipe/${recipe.id}`}>
         <div className={styles.recipeHeader}>
+          <Image
+            src={recipe.photo_url}
+            alt={recipe.title}
+            width={300}
+            height={300}
+            className={styles.recipeImage}
+          />
           <h2>{recipe.title}</h2>
-          <p>{recipe.description}</p>
         </div>
         <div className={styles.recipeData}>
           <div>
