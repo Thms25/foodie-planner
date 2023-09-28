@@ -21,3 +21,20 @@ body {
 a {
   text-decoration: none;
 }
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 1px 0 3px rgba(0, 0, 0, 0.2);
+  color: var(--green);
+  background-color: var(--white);
+  transition: 0.35s;
+
+  &:hover {
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.4);
+    background-color: var(--green);
+    color: var(--white);
+
+  }
+}

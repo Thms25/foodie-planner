@@ -60,45 +60,45 @@ export default function Page ({ params }) {
   return (
     <div>
       <div className={styles.recipePage}>
-        <div className={styles.recipeTop}>
+        <div className={styles.recipeLeft}>
           <div className={styles.recipeInfo}>
-            <div className={styles.title}>
-              <h2>{recipe.title}</h2>
-              <p>{recipe.rate}</p>
-            </div>
+            <h2 className={styles.title}>{recipe.title}</h2>
             <div className={styles.data}>
-              <p>{recipe.prep_time}</p>
-              <p>{recipe.servings}</p>
+              <p>preps: <span>{recipe.prep_time}</span></p>
+              <p>servings: <span>{recipe.servings}</span></p>
+              <p className='btn'>Add to calendar</p>
             </div>
-            <div>
+            <div className={styles.nutritions}>
               <ul>
-                <li>nutri <span>value</span></li>
-                <li>nutri <span>value</span></li>
-                <li>nutri <span>value</span></li>
-                <li>nutri <span>value</span></li>
-                <li>nutri <span>value</span></li>
+                <li>nutri <p>value</p></li>
+                <li>nutri <p>value</p></li>
+                <li>nutri <p>value</p></li>
+                <li>nutri <p>value</p></li>
+                <li>nutri <p>value</p></li>
               </ul>
             </div>
           </div>
+          <div className={styles.inregidents}>
+            <h5>Ingredients</h5>
+            <ul>
+              <li>this is and ingredient - quantity</li>
+              <li>this is and ingredient - quantity</li>
+              <li>this is and ingredient - quantity</li>
+              <li>this is and ingredient - quantity</li>
+              <li>this is and ingredient - quantity</li>
+            </ul>
+          </div>
+        </div>
+        <div className={styles.recipeRight}>
           <Image
             src={recipe.photo_url}
             alt={recipe.title}
-            width={300}
-            height={300}
-            className={styles.recipeImage}
+            width={480}
+            height={360}
+            className={styles.img}
             />
-        </div>
-        <div className={styles.recipeBot}>
-          <div className={styles.inregidents}>
-            <ul>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-            </ul>
-          </div>
           <div className={styles.instructions}>
+            <h5>Instructions</h5>
             <p>{recipe.description}</p>
           </div>
         </div>
