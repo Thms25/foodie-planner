@@ -15,7 +15,9 @@ const RecipeCard = ({ recipe, onDeleteRecipe }) => {
     onDeleteRecipe(id);
   }
 
-  const img_url = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CL_CLOUD}/image/upload/v1694797150/development/${recipe.photo_key}.jpg`
+  const img_url = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CL_CLOUD}/image/upload/v1695990100/${recipe.photo_key}.jpg`
+
+  console.log(img_url);
 
   return (
     <div className={styles.recipe}>
