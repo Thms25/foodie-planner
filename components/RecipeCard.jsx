@@ -15,12 +15,14 @@ const RecipeCard = ({ recipe, onDeleteRecipe }) => {
     onDeleteRecipe(id);
   }
 
+  const img_url = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CL_CLOUD}/image/upload/v1694797150/development/${recipe.photo_key}.jpg`
+
   return (
     <div className={styles.recipe}>
       <Link href={`/recipe/${recipe.id}`}>
         <div className={styles.recipeHeader}>
           <Image
-            src={recipe.photo_url}
+            src={img_url}
             alt={recipe.title}
             width={300}
             height={300}

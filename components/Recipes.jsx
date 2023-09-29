@@ -18,7 +18,6 @@ const Recipes = () => {
       const myRecipes = await fetchRecipes();
       setRecipes(myRecipes);
       setIsLoading(false)
-      console.log(recipes);
     }
     getRecipes();
   }, []);

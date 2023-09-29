@@ -57,6 +57,8 @@ export default function Page ({ params }) {
     }
   }
 
+  const img_url = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CL_CLOUD}/image/upload/v1694797150/development/${recipe.photo_key}.jpg`
+
   return (
     <div>
       <div className={styles.recipePage}>
@@ -91,7 +93,7 @@ export default function Page ({ params }) {
         </div>
         <div className={styles.recipeRight}>
           <Image
-            src={recipe.photo_url}
+            src={img_url}
             alt={recipe.title}
             width={480}
             height={360}
