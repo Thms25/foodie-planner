@@ -7,25 +7,25 @@ import {
   faStar
 } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
-import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 
-const RecipeCard = ({ recipe, onDeleteRecipe }) => {
+
+export default function RecipeCard ({ recipe, onDeleteRecipe }) {
 
   const deleteRecipe = (id) => {
     onDeleteRecipe(id);
   }
 
-  const img_url = `https://res.cloudinary.com/${recipe.photo_url}`
-
   return (
     <div className={styles.recipe}>
       <Link href={`/recipe/${recipe.id}`}>
         <div className={styles.recipeHeader}>
-          <Image
-            src={img_url}
+          <CldImage
+            src={recipe.photo_key}
             alt={recipe.title}
             width={300}
             height={300}
+            crop='fill'
             className={styles.recipeImage}
           />
           <h2>{recipe.title}</h2>
@@ -49,5 +49,3 @@ const RecipeCard = ({ recipe, onDeleteRecipe }) => {
     </div>
   );
 }
-
-export default RecipeCard;
