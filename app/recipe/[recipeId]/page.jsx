@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import styles from 'styles/recipePage.module.scss'
 import EditRecipe from "@/components/EditRecipe";
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
+
 
 async function fetchRecipe(id) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`)
@@ -92,11 +93,12 @@ export default function Page ({ params }) {
           </div>
         </div>
         <div className={styles.recipeRight}>
-          <Image
-            src={img_url}
+          <CldImage
+            src={recipe.photo_key}
             alt={recipe.title}
             width={480}
             height={360}
+            crop='fill'
             className={styles.img}
             />
           <div className={styles.instructions}>
