@@ -7,7 +7,8 @@ import {
   faStar
 } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
-import { CldImage } from 'next-cloudinary';
+// import { CldImage } from 'next-cloudinary';
+import Image from 'next/image';
 
 
 export default function RecipeCard ({ recipe, onDeleteRecipe }) {
@@ -20,8 +21,8 @@ export default function RecipeCard ({ recipe, onDeleteRecipe }) {
     <div className={styles.recipe}>
       <Link href={`/recipe/${recipe.id}`}>
         <div className={styles.recipeHeader}>
-          <CldImage
-            src={recipe.photo_key}
+          <Image
+            src={recipe.photo_url}
             alt={recipe.title}
             width={300}
             height={300}

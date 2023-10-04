@@ -33,7 +33,7 @@ const Navbar = () => {
           <input type="text" placeholder='Search for something...' className={styles.searchInput} />
         </div>
         <FontAwesomeIcon
-          onClick={() => setModaOpen(modalOpen ? false : true)}
+          onClick={() => open()}
           icon={faUser}
           className={styles.userIcon}
         />

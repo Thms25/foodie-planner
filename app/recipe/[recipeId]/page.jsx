@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import styles from 'styles/recipePage.module.scss'
 import EditRecipe from "@/components/EditRecipe";
 import { useRouter } from 'next/navigation';
-import { CldImage } from 'next-cloudinary';
+// import { CldImage } from 'next-cloudinary';
+import Image from 'next/image';
+
 
 
 async function fetchRecipe(id) {
@@ -15,6 +17,7 @@ async function fetchRecipe(id) {
 export default function Page ({ params }) {
   const [recipe, setRecipe] = useState({})
   const [edit, setEdit] = useState(false)
+  const [recipeFetched, setRecipeFetched] = useState(false)
 
   const router = useRouter();
 
@@ -22,6 +25,7 @@ export default function Page ({ params }) {
     async function getRecipe() {
       const myRecipe = await fetchRecipe(params.recipeId)
       setRecipe(myRecipe)
+      setRecipeFetched(true);
     }
     getRecipe();
   }, []);
@@ -58,55 +62,56 @@ export default function Page ({ params }) {
     }
   }
 
-  const img_url = `https://res.cloudinary.com/${recipe.photo_url}`
-
   return (
     <div>
-      <div className={styles.recipePage}>
-        <div className={styles.recipeLeft}>
-          <div className={styles.recipeInfo}>
-            <h2 className={styles.title}>{recipe.title}</h2>
-            <div className={styles.data}>
-              <p>preps: <span>{recipe.prep_time}</span></p>
-              <p>servings: <span>{recipe.servings}</span></p>
-              <p className='btn'>Add to calendar</p>
+      {recipeFetched && (
+        <div className={styles.recipePage}>
+          {console.log(recipe)}
+          <div className={styles.recipeLeft}>
+            <div className={styles.recipeInfo}>
+              <h2 className={styles.title}>{recipe.title}</h2>
+              <div className={styles.data}>
+                <p>preps: <span>{recipe.prep_time}</span></p>
+                <p>servings: <span>{recipe.servings}</span></p>
+                <p className='btn'>Add to calendar</p>
+              </div>
+              <div className={styles.nutritions}>
+                <ul>
+                  <li>nutri <p>value</p></li>
+                  <li>nutri <p>value</p></li>
+                  <li>nutri <p>value</p></li>
+                  <li>nutri <p>value</p></li>
+                  <li>nutri <p>value</p></li>
+                </ul>
+              </div>
             </div>
-            <div className={styles.nutritions}>
+            <div className={styles.inregidents}>
+              <h5>Ingredients</h5>
               <ul>
-                <li>nutri <p>value</p></li>
-                <li>nutri <p>value</p></li>
-                <li>nutri <p>value</p></li>
-                <li>nutri <p>value</p></li>
-                <li>nutri <p>value</p></li>
+                <li>this is and ingredient - quantity</li>
+                <li>this is and ingredient - quantity</li>
+                <li>this is and ingredient - quantity</li>
+                <li>this is and ingredient - quantity</li>
+                <li>this is and ingredient - quantity</li>
               </ul>
             </div>
           </div>
-          <div className={styles.inregidents}>
-            <h5>Ingredients</h5>
-            <ul>
-              <li>this is and ingredient - quantity</li>
-              <li>this is and ingredient - quantity</li>
-              <li>this is and ingredient - quantity</li>
-              <li>this is and ingredient - quantity</li>
-              <li>this is and ingredient - quantity</li>
-            </ul>
-          </div>
-        </div>
-        <div className={styles.recipeRight}>
-          <CldImage
-            src={recipe.photo_key}
-            alt={recipe.title}
-            width={480}
-            height={360}
-            crop='fill'
-            className={styles.img}
+          <div className={styles.recipeRight}>
+            <Image
+              src={recipe.photo_url}
+              alt={recipe.title}
+              width={480}
+              height={360}
+              crop='fill'
+              className={styles.img}
             />
-          <div className={styles.instructions}>
-            <h5>Instructions</h5>
-            <p>{recipe.description}</p>
+            <div className={styles.instructions}>
+              <h5>Instructions</h5>
+              <p>{recipe.description}</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {edit && (
         <EditRecipe recipe={recipe} editRecipe={handleEditRecipe} />
         )}
