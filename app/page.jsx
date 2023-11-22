@@ -9,7 +9,7 @@ export default function Home() {
       <Banner />
       <div className={styles.recipes}>
         <h2>Browse through our most liked recipes...</h2>
-        <Recipes />
+        {/* <Recipes /> */}
       </div>
       <div className={styles.calendar}>
         <Calendar />

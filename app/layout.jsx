@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import '../styles/globals.scss'
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import Provider from "@/auth/Provider";
 config.autoAddCss = false;
 
 export const metadata = {
@@ -13,8 +14,10 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <Navbar />
-        {children}
+        <Provider>
+          {children}
+          <Navbar />
+        </Provider>
       </body>
     </html>
   );
