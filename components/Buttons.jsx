@@ -1,25 +1,25 @@
-const SignIn = ({ provider }) => {
-  return (
-    <button className="btn text-2xl">
-      Sign In
-    </button>
-  );
-}
+import { signIn, signOut } from 'next-auth/react';
 
 const LogIn = ({ provider }) => {
   return (
-    <button className="btn text-2xl">
-      Log In
+    <button
+      onClick={() => signIn(provider.id)}
+      className="btn text-2xl"
+    >
+      Sign In
     </button>
   );
 }
 
 const LogOut = () => {
   return (
-    <button className="btn text-2xl">
+    <button
+      onClick={() => signOut()}
+      className="btn text-2xl"
+    >
       Log Out
     </button>
   );
 }
 
-export  { SignIn, LogIn, LogOut };
+export  { LogIn, LogOut };

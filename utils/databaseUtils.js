@@ -6,12 +6,12 @@ export async function connectToDb() {
   mongoose.set("strictQuery", true);
 
   if (isConnected) {
-    console.log("mogoDb is connected");
+    console.log("mongoDb is connected");
     return;
   } else {
     try {
       mongoose.connect(proces.env.MONGODB_URI, {
-        dbName: "foodie-planner-db",
+        dbName: "foodie_planner_DB",
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });

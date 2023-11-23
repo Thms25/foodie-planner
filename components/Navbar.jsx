@@ -18,18 +18,18 @@ import {
 import NewRecipe from "@/components/NewRecipe";
 
 // Auth
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
-import { LogIn, LogOut, SignIn } from './Buttons';
+import { useSession, getProviders } from 'next-auth/react';
+import { LogOut, LogIn } from './Buttons';
 
-const Navbar = () => {
-  const { data: session } = useSession();
-  console.log(session);
+export default function Navbar () {
+  const { data: session, status } = useSession();
+
+  // console.log("session", session);
   const [providers, setProviders] = useState(null);
 
   useEffect(() => {
     async function settingProviders() {
       const res = await getProviders()
-      console.log(res);
       setProviders(res)
     }
 
@@ -59,9 +59,9 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
           <input type="text" placeholder='Search for something...' className={styles.searchInput} />
         </div>
-        {session.user ? (
+        {session?.user ? (
           <div className='d-flex'>
-            <LogOut />
+            <LogOut onClick={() => signOut()} />
             <FontAwesomeIcon
               onClick={() => open()}
               icon={faUser}
@@ -72,11 +72,8 @@ const Navbar = () => {
           <>
             {providers && (
               <div className='d-flex'>
-                {Object.values.map((provider) => (
-                  <>
-                    <SignIn provider={provider} />
-                    <LogIn provider={provider} />
-                  </>
+                {Object.values(providers)?.map((provider) => (
+                  <LogIn provider={provider} key={provider.name} />
                 ))}
               </div>
             )}
@@ -86,12 +83,13 @@ const Navbar = () => {
       <div>
         <AnimatePresence initial={false} mode="wait">
           {modalOpen && (
-            <NewRecipe modalOpen={modalOpen} handleClose={close} />
+            <NewRecipe
+              modalOpen={modalOpen}
+              handleClose={close}
+            />
           )}
         </AnimatePresence>
       </div>
     </>
   );
 }
-
-export default Navbar;
