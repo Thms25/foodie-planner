@@ -22,9 +22,6 @@ import { getProviders } from 'next-auth/react';
 import { LogOut, LogIn } from './Buttons';
 
 export default function Navbar ({ session}) {
-  console.log(session);
-
-  // console.log("session", session);
   const [providers, setProviders] = useState(null);
 
   useEffect(() => {
@@ -34,9 +31,6 @@ export default function Navbar ({ session}) {
     }
 
     settingProviders()
-    return () => {
-      console.log("clean up");
-    };
   }, []);
 
   const [modalOpen, setModaOpen] = useState(false);
