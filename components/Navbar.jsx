@@ -18,11 +18,11 @@ import {
 import NewRecipe from "@/components/NewRecipe";
 
 // Auth
-import { useSession, getProviders } from 'next-auth/react';
+import { getProviders } from 'next-auth/react';
 import { LogOut, LogIn } from './Buttons';
 
-export default function Navbar () {
-  const { data: session, status } = useSession();
+export default function Navbar ({ session}) {
+  console.log(session);
 
   // console.log("session", session);
   const [providers, setProviders] = useState(null);

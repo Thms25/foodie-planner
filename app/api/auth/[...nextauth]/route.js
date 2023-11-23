@@ -21,6 +21,8 @@ const handler = NextAuth({
         email: session.user.email,
       });
 
+      // console.log(sessionUser);
+
       session.user.id = sessionUser._id.toString();
       return session;
     },
@@ -31,6 +33,8 @@ const handler = NextAuth({
         const userExists = await User.findOne({
           email: profile.email,
         });
+
+        console.log(userExists);
 
         if (!userExists) {
           await User.create({

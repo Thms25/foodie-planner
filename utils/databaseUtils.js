@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 let isConnected = false;
 
 export async function connectToDb() {
-  console.log("arrived in connectToDb function");
   mongoose.set("strictQuery", true);
 
   if (isConnected) {
@@ -12,7 +11,6 @@ export async function connectToDb() {
   }
 
   try {
-    console.log("trying to connect to mongoDB");
     await mongoose.connect(process.env.MONGODB_URI, {
       dbName: "foodie_planner_DB",
       useNewUrlParser: true,
@@ -20,6 +18,8 @@ export async function connectToDb() {
     });
 
     isConnected = true;
+
+    console.log("mongoDb is connected");
   } catch (error) {
     console.log(error);
     throw new Error(error);
