@@ -22,12 +22,14 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 import { LogIn, LogOut, SignIn } from './Buttons';
 
 const Navbar = () => {
-  const isUserLoggedIn = true;
+  const { data: session } = useSession();
+  console.log(session);
   const [providers, setProviders] = useState(null);
 
   useEffect(() => {
     async function settingProviders() {
       const res = await getProviders()
+      console.log(res);
       setProviders(res)
     }
 
@@ -57,7 +59,7 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
           <input type="text" placeholder='Search for something...' className={styles.searchInput} />
         </div>
-        {isUserLoggedIn ? (
+        {session.user ? (
           <div className='d-flex'>
             <LogOut />
             <FontAwesomeIcon
