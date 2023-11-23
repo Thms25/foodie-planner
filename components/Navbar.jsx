@@ -61,7 +61,7 @@ export default function Navbar () {
         </div>
         {session?.user ? (
           <div className='d-flex'>
-            <LogOut onClick={() => signOut()} />
+            <LogOut />
             <FontAwesomeIcon
               onClick={() => open()}
               icon={faUser}
