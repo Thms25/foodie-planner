@@ -17,8 +17,10 @@ import NewRecipe from "@/components/NewRecipe";
 // Auth
 import { getProviders } from 'next-auth/react';
 import { signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 
 export default function UserDropdown ({ session }) {
+  console.log(session);
   const [providers, setProviders] = useState(null);
   const [open, setOpen] = useState(false);
   const [modalOpen, setModaOpen] = useState(false);
@@ -42,7 +44,17 @@ export default function UserDropdown ({ session }) {
           className="flex items-center gap-2 px-3 py-2 rounded-md text-light text-lg hover:text-primary hover:bg-light transition-colors"
         >
           <motion.span>
-            <FaRegUser variants={iconVariants} />
+            {session ? (
+                <Image
+                priority
+                  width={37}
+                  height={37}
+                  src={session.user.image}
+                  className="rounded-full"
+                />
+              ) : (
+              <FaRegUser variants={iconVariants} size={24} />
+            )}
           </motion.span>
         </button>
 
