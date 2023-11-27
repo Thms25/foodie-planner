@@ -1,7 +1,7 @@
 'use client';
 
 // Hooks
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 
 // Style
@@ -13,30 +13,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
-  faUser
 } from "@fortawesome/free-solid-svg-icons";
 import NewRecipe from "@/components/NewRecipe";
+import UserDropdown from './UserDropdown';
 
-// Auth
-import { getProviders } from 'next-auth/react';
-import { LogOut, LogIn } from './Buttons';
 
-export default function Navbar ({ session}) {
-  const [providers, setProviders] = useState(null);
-
-  useEffect(() => {
-    async function settingProviders() {
-      const res = await getProviders()
-      setProviders(res)
-    }
-
-    settingProviders()
-  }, []);
-
-  const [modalOpen, setModaOpen] = useState(false);
-  const close = () => setModaOpen(false);
-  const open = () => setModaOpen(true);
-
+export default function Navbar ({ session }) {
   return (
     <>
       <nav className={styles.navbar}>
@@ -45,6 +27,7 @@ export default function Navbar ({ session}) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 3 }}
+            className='text-3xl'
           >
             Foodie Planner
           </motion.h2>
@@ -53,37 +36,8 @@ export default function Navbar ({ session}) {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
           <input type="text" placeholder='Search for something...' className={styles.searchInput} />
         </div>
-        {session?.user ? (
-          <div className='d-flex'>
-            <LogOut />
-            <FontAwesomeIcon
-              onClick={() => open()}
-              icon={faUser}
-              className={styles.userIcon}
-            />
-          </div>
-        ) : (
-          <>
-            {providers && (
-              <div className='d-flex'>
-                {Object.values(providers)?.map((provider) => (
-                  <LogIn provider={provider} key={provider.name} />
-                ))}
-              </div>
-            )}
-          </>
-        )}
+        <UserDropdown session={session} />
       </nav>
-      <div>
-        <AnimatePresence initial={false} mode="wait">
-          {modalOpen && (
-            <NewRecipe
-              modalOpen={modalOpen}
-              handleClose={close}
-            />
-          )}
-        </AnimatePresence>
-      </div>
     </>
   );
 }

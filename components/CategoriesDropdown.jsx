@@ -34,8 +34,9 @@ export default function CategoriesDropdown () {
   return (
     <section className="p-4 md:p-8">
       <div className="mx-auto max-w-5xl">
-        {categories.map((cat) => (
+        {categories.map((cat, index) => (
           <Link
+            key={index}
             heading={cat.title}
             subheading={cat.sub}
             imgSrc={cat.ing}

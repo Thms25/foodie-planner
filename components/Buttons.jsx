@@ -6,7 +6,7 @@ const LogIn = ({ provider }) => {
       onClick={() => signIn(provider.id)}
       className="btn text-2xl"
     >
-      Sign In
+      Log In
     </button>
   );
 }

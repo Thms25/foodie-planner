@@ -1,10 +1,15 @@
-import Navbar from "@/components/Navbar";
+// Styles
 import '../styles/globals.scss'
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
+// Components
+import Navbar from "@/components/Navbar";
+
+// Auh
 import Provider from "@/auth/Provider";
 import { getServerSession } from "next-auth";
-config.autoAddCss = false;
 
 export const metadata = {
   title: "Foodie Planner",
