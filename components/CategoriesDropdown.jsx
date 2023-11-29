@@ -1,5 +1,6 @@
 'use client';
 
+import { arrowRight } from "@/utils/svgData";
 import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 
@@ -7,25 +8,21 @@ const categories = [
   {
     title: "Top Of The Month",
     sub: "Browse through what all of you prefered this month",
-    ing: "/images/foodBanner.jpg",
     link: "#"
   },
   {
     title: "Recipes Of The Season",
     sub: "Get inspired to eat according to the weather",
-    ing: "/images/foodBanner.jpg",
     link: "#"
   },
   {
     title: "Most Cooked Recipes",
     sub: "hello, description tba",
-    ing: "/images/foodBanner.jpg",
     link: "#"
   },
   {
     title: "Vegetarian Corner",
     sub: "Fin the best recipes with no animals on the memnu",
-    ing: "/images/foodBanner.jpg",
     link: "#"
   },
 ]
@@ -33,13 +30,12 @@ const categories = [
 export default function CategoriesDropdown () {
   return (
     <section className="p-4 md:p-8">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-4 max-w-3xl">
         {categories.map((cat, index) => (
           <Link
             key={index}
             heading={cat.title}
             subheading={cat.sub}
-            imgSrc={cat.ing}
             href={cat.link}
           />
         ))}
@@ -118,23 +114,6 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
         </span>
       </div>
 
-      <motion.img
-        style={{
-          top,
-          left,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        variants={{
-          initial: { scale: 0, rotate: "-12.5deg" },
-          whileHover: { scale: 1, rotate: "12.5deg" },
-        }}
-        transition={{ type: "spring" }}
-        src={imgSrc}
-        className="text-6xl absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-64"
-        alt={`Image representing a link for ${heading}`}
-      />
-
       <motion.div
         variants={{
           initial: {
@@ -149,7 +128,7 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
         transition={{ type: "spring" }}
         className="relative z-10 p-4"
       >
-        <p className="text-5xl text-neutral-50" > arrow </p>
+        <div className="text-black-800 w-14 h-14 " >{arrowRight}</div>
       </motion.div>
     </motion.a>
   );

@@ -20,7 +20,6 @@ import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 
 export default function UserDropdown ({ session }) {
-  console.log(session);
   const [providers, setProviders] = useState(null);
   const [open, setOpen] = useState(false);
   const [modalOpen, setModaOpen] = useState(false);
