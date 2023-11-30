@@ -4,29 +4,19 @@ import { useEffect, useState } from 'react';
 import RecipeCard from "./RecipeCard";
 import styles from "../styles/recipes.module.scss";
 
-async function fetchRecipes() {
-  const res = await fetch(process.env.NEXT_PUBLIC_RECIPES);
-  return res.json();
-}
+// Utils
+import { getRecipes, deleteRecipe } from '@/utils/fetchUtils';
+import { fakeRecipes } from '@/utils/fakeData/fakeRecipes';
+import RecipeCaroussel from './Recipes/RecipeCaroussel';
 
-const Recipes = () => {
+
+export default function Recipes () {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    async function getRecipes() {
-      const myRecipes = await fetchRecipes();
-      setRecipes(myRecipes);
-      setIsLoading(false)
-    }
-    getRecipes();
-  }, []);
-
   const handleDeleteRecipe = async (id) => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`, {
-        method: 'DELETE',
-      })
+      const res = await deleteRecipe(id)
       if (res.ok) {
         setRecipes(recipes.filter((recipe) => recipe.id !== id));
       } else {
@@ -37,23 +27,25 @@ const Recipes = () => {
     }
   }
 
+  useEffect(() => {
+    // async function fetchRecipes() {
+    //   const myRecipes = await getRecipes();
+    //   setRecipes(myRecipes);
+    //   setIsLoading(false);
+    // }
+    // fetchRecipes();
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <h1 className='animate-pulse text-4xl m-auto p-24 font-bold'>Loading...</h1>
       ) : (
-        <div className={styles.recipes}>
-          {recipes.map((recipe) => {
-            return (
-              <div key={recipe.id}>
-                <RecipeCard recipe={recipe} onDeleteRecipe={handleDeleteRecipe} />
-              </div>
-            );
-          })}
-        </div>
+        <RecipeCaroussel recipes={fakeRecipes}/>
       )}
     </>
   )
 };
-
-export default Recipes;

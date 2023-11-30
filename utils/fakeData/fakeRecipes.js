@@ -1,4 +1,4 @@
-const fakeRecipes = [
+export const fakeRecipes = [
   {
     title: "Chicken Alfredo Pasta",
     description:
@@ -6,7 +6,8 @@ const fakeRecipes = [
     foodCategory: "Italian",
     servings: 4,
     prepTime: "30 minutes",
-    image: "chicken_alfredo_pasta.jpg",
+    image:
+      "https://images.unsplash.com/photo-1484980972926-edee96e0960d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MDEzNDA3NjU&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   },
   {
     title: "Beef Tacos",
@@ -15,7 +16,8 @@ const fakeRecipes = [
     foodCategory: "Mexican",
     servings: 6,
     prepTime: "25 minutes",
-    image: "beef_tacos.jpg",
+    image:
+      "https://images.unsplash.com/photo-1506458539166-34079f9e1d2c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MDEzNDA3OTc&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   },
   {
     title: "Vegetable Stir-Fry",
@@ -24,7 +26,8 @@ const fakeRecipes = [
     foodCategory: "Asian",
     servings: 3,
     prepTime: "20 minutes",
-    image: "vegetable_stirfry.jpg",
+    image:
+      "https://images.unsplash.com/photo-1547592180-85f173990554?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MDEzNDA4MjE&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   },
   {
     title: "Classic Cheeseburger",
@@ -33,7 +36,8 @@ const fakeRecipes = [
     foodCategory: "American",
     servings: 2,
     prepTime: "25 minutes",
-    image: "classic_cheeseburger.jpg",
+    image:
+      "https://images.unsplash.com/photo-1486328228599-85db4443971f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MDEzNDA4NzI&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   },
   {
     title: "Lemon Herb Roast Chicken",
@@ -42,7 +46,8 @@ const fakeRecipes = [
     foodCategory: "Roast",
     servings: 4,
     prepTime: "1 hour 30 minutes",
-    image: "roast_chicken.jpg",
+    image:
+      "https://images.unsplash.com/photo-1539136788836-5699e78bfc75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MDEzNDA4ODg&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   },
   {
     title: "Pasta Primavera",
@@ -51,7 +56,8 @@ const fakeRecipes = [
     foodCategory: "Italian",
     servings: 4,
     prepTime: "35 minutes",
-    image: "pasta_primavera.jpg",
+    image:
+      "https://images.unsplash.com/photo-1568093858174-0f391ea21c45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MDEzNDA5MTQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   },
   {
     title: "Fish Tacos",
@@ -60,7 +66,8 @@ const fakeRecipes = [
     foodCategory: "Seafood",
     servings: 3,
     prepTime: "30 minutes",
-    image: "fish_tacos.jpg",
+    image:
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MDEzNDA5MzA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   },
   {
     title: "Baked Ziti",
@@ -69,7 +76,8 @@ const fakeRecipes = [
     foodCategory: "Italian",
     servings: 5,
     prepTime: "40 minutes",
-    image: "baked_ziti.jpg",
+    image:
+      "https://images.unsplash.com/photo-1525351326368-efbb5cb6814d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MDEzNDA5NDM&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   },
   {
     title: "Spinach and Feta Stuffed Chicken",
@@ -78,7 +86,8 @@ const fakeRecipes = [
     foodCategory: "Mediterranean",
     servings: 2,
     prepTime: "45 minutes",
-    image: "spinach_feta_chicken.jpg",
+    image:
+      "https://images.unsplash.com/photo-1551024506-0bccd828d307?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MDEzNDA5NTU&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   },
   {
     title: "Shrimp Scampi",
@@ -87,114 +96,7 @@ const fakeRecipes = [
     foodCategory: "Seafood",
     servings: 3,
     prepTime: "20 minutes",
-    image: "shrimp_scampi.jpg",
-  },
-  {
-    title: "Eggplant Parmesan",
-    description:
-      "Slices of eggplant breaded, fried, and baked with marinara sauce and mozzarella.",
-    foodCategory: "Italian",
-    servings: 4,
-    prepTime: "50 minutes",
-    image: "eggplant_parmesan.jpg",
-  },
-  {
-    title: "Honey Garlic Glazed Salmon",
-    description:
-      "Salmon fillets glazed with a sweet and savory honey garlic sauce, broiled to perfection.",
-    foodCategory: "Seafood",
-    servings: 2,
-    prepTime: "18 minutes",
-    image: "honey_garlic_salmon.jpg",
-  },
-  {
-    title: "Caesar Salad",
-    description:
-      "Crisp romaine lettuce, croutons, Parmesan cheese, and Caesar dressing.",
-    foodCategory: "Salad",
-    servings: 3,
-    prepTime: "15 minutes",
-    image: "caesar_salad.jpg",
-  },
-  {
-    title: "Chicken Quesadillas",
-    description:
-      "Grilled flour tortillas filled with chicken, cheese, and peppers, served with salsa.",
-    foodCategory: "Mexican",
-    servings: 4,
-    prepTime: "20 minutes",
-    image: "chicken_quesadillas.jpg",
-  },
-  {
-    title: "Lentil Soup",
-    description:
-      "Hearty soup made with lentils, vegetables, and spices, perfect for a chilly day.",
-    foodCategory: "Soup",
-    servings: 6,
-    prepTime: "50 minutes",
-    image: "lentil_soup.jpg",
-  },
-  {
-    title: "Stuffed Bell Peppers",
-    description:
-      "Bell peppers filled with a mixture of ground beef, rice, tomatoes, and spices.",
-    foodCategory: "Comfort Food",
-    servings: 4,
-    prepTime: "45 minutes",
-    image: "stuffed_bell_peppers.jpg",
-  },
-  {
-    title: "Tofu Stir-Fry",
-    description:
-      "Tofu cubes and mixed vegetables stir-fried in a savory soy-based sauce.",
-    foodCategory: "Vegetarian",
-    servings: 3,
-    prepTime: "25 minutes",
-    image: "tofu_stirfry.jpg",
-  },
-  {
-    title: "Greek Salad",
-    description:
-      "Fresh salad with tomatoes, cucumbers, red onions, olives, feta cheese, and Greek dressing.",
-    foodCategory: "Mediterranean",
-    servings: 2,
-    prepTime: "15 minutes",
-    image: "greek_salad.jpg",
-  },
-  {
-    title: "Pork Chops with Apple Compote",
-    description:
-      "Pan-seared pork chops served with a sweet and tangy apple compote.",
-    foodCategory: "Comfort Food",
-    servings: 2,
-    prepTime: "35 minutes",
-    image: "pork_chops_apple_compote.jpg",
-  },
-  {
-    title: "Mango Salsa Chicken",
-    description:
-      "Grilled chicken topped with fresh mango salsa for a tropical twist.",
-    foodCategory: "Fusion",
-    servings: 3,
-    prepTime: "30 minutes",
-    image: "mango_salsa_chicken.jpg",
-  },
-  {
-    title: "Vegetable Curry",
-    description:
-      "Assorted vegetables cooked in a flavorful curry sauce, served with rice.",
-    foodCategory: "Indian",
-    servings: 5,
-    prepTime: "40 minutes",
-    image: "vegetable_curry.jpg",
-  },
-  {
-    title: "Butternut Squash Risotto",
-    description:
-      "Creamy risotto made with butternut squash, onions, and Parmesan cheese.",
-    foodCategory: "Italian",
-    servings: 4,
-    prepTime: "45 minutes",
-    image: "butternut_squash_risotto.jpg",
+    image:
+      "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Zm9vZHx8fHx8fDE3MDEzNDA5Njg&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   },
 ];
