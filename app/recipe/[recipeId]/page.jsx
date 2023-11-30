@@ -2,7 +2,7 @@
 
 // import { useState, useEffect } from 'react';
 import styles from 'styles/recipePage.module.scss'
-import EditRecipe from "@/components/EditRecipe";
+import EditRecipe from "@/components/Recipes/EditRecipe";
 // import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 

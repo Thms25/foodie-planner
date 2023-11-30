@@ -28,13 +28,13 @@ const homeCtaData = [
 
 export default function HomeCta() {
   return (
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 w-full lg:w-1/2 mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 w-full mx-auto px-12">
         {homeCtaData.map((card) => (
           <Card
             heading={card.heading}
             description={card.description}
             imgSrc={card.imgSrc}
-            className="w-full h-full bg-slate-300 overflow-hidden cursor-pointer group"
+            className="w-full h-full bg-slate-300 overflow-hidden cursor-pointer group relative"
           />
         ))}
       </div>
@@ -48,14 +48,17 @@ const Card = ({ heading, description, imgSrc, className }) => {
         staggerChildren: 0.035,
       }}
       whileHover="hover"
-      className={`${className} inset-0 saturate-100 md:saturate-0 md:group-hover:saturate-100 group-hover:scale-110 transition-all duration-500 w-full h-full`}
-      style={{
-        backgroundImage: `url(${imgSrc})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        objectFit: "contain",
-      }}
+      className={className}
     >
+      <div
+        className="inset-0 saturate-100 md:saturate-0 md:group-hover:saturate-100 group-hover:scale-110 transition-all duration-500 w-full h-full absolute"
+        style={{
+          backgroundImage: `url(${imgSrc})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          objectFit: "contain",
+        }}
+      />
       <div className="p-4 relative z-20 h-full group-hover:text-white transition-colors duration-500 flex flex-col justify-between">
         <FiArrowRight className="text-2xl group-hover:-rotate-45 transition-transform duration-500 ml-auto" />
         <div>

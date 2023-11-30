@@ -14,8 +14,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import NewRecipe from "@/components/NewRecipe";
-import UserDropdown from './UserDropdown';
+import NewRecipe from "@/components/Recipes/NewRecipe";
+import UserDropdown from './dropdowns/UserDropdown';
 
 
 export default function Navbar ({ session }) {

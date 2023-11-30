@@ -51,12 +51,6 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
-
-  const top = useTransform(mouseYSpring, [0.5, -0.5], ["40%", "60%"]);
-  const left = useTransform(mouseXSpring, [0.5, -0.5], ["60%", "70%"]);
-
   const handleMouseMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
 
@@ -86,28 +80,21 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
         <motion.span
           variants={{
             initial: { x: 0 },
-            whileHover: { x: -16 },
+            whileHover: { x: -10 },
           }}
           transition={{
             type: "spring",
+            damping: 40,
             staggerChildren: 0.075,
-            delayChildren: 0.25,
+            delayChildren: 0.15,
           }}
-          className="relative z-10 block text-4xl font-bold text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50 md:text-6xl"
+          className="relative z-10 block text-xl font-bold text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50 md:text-4xl"
         >
-          {heading.split("").map((l, i) => (
-            <motion.span
-              variants={{
-                initial: { x: 0 },
-                whileHover: { x: 16 },
-              }}
-              transition={{ type: "spring", damping: 100 }}
-              className="inline-block"
-              key={i}
-            >
-              {l}
-            </motion.span>
-          ))}
+          <span
+            className="inline-block"
+          >
+            {heading}
+          </span>
         </motion.span>
         <span className="relative z-10 mt-2 block text-base text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50">
           {subheading}
@@ -126,7 +113,7 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
           },
         }}
         transition={{ type: "spring" }}
-        className="relative z-10 p-4"
+        className="relative z-10 p-2"
       >
         <div className="text-black-800 w-14 h-14 " >{arrowRight}</div>
       </motion.div>

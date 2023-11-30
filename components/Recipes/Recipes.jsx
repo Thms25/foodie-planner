@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import RecipeCard from "./RecipeCard";
-import styles from "../styles/recipes.module.scss";
+import styles from "styles/recipes.module.scss";
 
 // Utils
 import { getRecipes, deleteRecipe } from '@/utils/fetchUtils';
 import { fakeRecipes } from '@/utils/fakeData/fakeRecipes';
-import RecipeCaroussel from './Recipes/RecipeCaroussel';
+import RecipeCaroussel from './RecipeCaroussel';
 
 
 export default function Recipes () {

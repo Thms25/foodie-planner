@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styles from 'styles/newRecipe.module.scss';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import Backdrop from "./Backdrop";
+import Backdrop from "../Backdrop";
 
 export default function newRecipe({ handleClose }) {
   const router = useRouter();

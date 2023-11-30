@@ -1,4 +1,4 @@
-import styles from '../styles/recipeCard.module.scss'
+import styles from 'styles/recipeCard.module.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashCan,

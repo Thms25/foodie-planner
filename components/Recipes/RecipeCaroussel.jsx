@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useMotionValueEvent } from "framer-motion";
-import RecipeCard from "../RecipeCard";
+import RecipeCard from "./RecipeCard";
 
 const imgs = [
   "/imgs/nature/1.jpg",

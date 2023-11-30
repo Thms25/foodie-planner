@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
 // Components
-import NewRecipe from "@/components/NewRecipe";
+import NewRecipe from "@/components/Recipes/NewRecipe";
 
 // Auth
 import { getProviders } from 'next-auth/react';
