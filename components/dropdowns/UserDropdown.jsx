@@ -10,21 +10,21 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Hooks
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation'
 
 // Components
-import NewRecipe from "@/components/Recipes/NewRecipe";
+import Image from "next/image";
 
 // Auth
 import { getProviders } from 'next-auth/react';
 import { signIn, signOut } from "next-auth/react";
-import Image from "next/image";
 
 export default function UserDropdown ({ session }) {
   const [providers, setProviders] = useState(null);
   const [open, setOpen] = useState(false);
-  const [modalOpen, setModaOpen] = useState(false);
-  const closeModal = () => setModaOpen(false);
-  const openModal = () => setModaOpen(true);
+
+  const router = useRouter();
+  const createRecipe = () => router.push('/recipe/create');
 
   useEffect(() => {
     async function settingProviders() {
@@ -36,70 +36,61 @@ export default function UserDropdown ({ session }) {
   }, []);
 
   return (
-    <>
-      <motion.div animate={open ? "open" : "closed"} className="relative">
-        <button
-          onClick={() => setOpen((pv) => !pv)}
-          className="flex items-center gap-2 px-3 py-2 rounded-md text-light text-lg hover:text-primary hover:bg-light transition-colors"
-        >
-          <motion.span>
-            {session ? (
-                <Image
-                priority
-                  width={37}
-                  height={37}
-                  src={session.user.image}
-                  className="rounded-full"
-                />
-              ) : (
-              <FaRegUser variants={iconVariants} size={24} />
-            )}
-          </motion.span>
-        </button>
-
-        <motion.ul
-          initial={wrapperVariants.closed}
-          variants={wrapperVariants}
-          style={{ originY: "top", translateX: "-75%" }}
-          className="bg-primary flex z-10 flex-col gap-2 p-2 rounded-lg shadow-xl absolute top-[180%] w-48 overflow-hidden"
-        >
+    <motion.div animate={open ? "open" : "closed"} className="relative">
+      <button
+        onClick={() => setOpen((pv) => !pv)}
+        className="flex items-center gap-2 px-3 py-2 rounded-md text-light text-lg hover:text-primary hover:bg-light transition-colors"
+      >
+        <motion.span>
           {session ? (
-            <>
-              <DropdownItem setOpen={setOpen} Icon={RxDashboard} text="Dashboard" />
-              <DropdownItem setOpen={setOpen} Icon={MdDateRange} text="Calendar" />
-              <DropdownItem setOpen={setOpen} Icon={FiPlusSquare} text="Create A Recipe" func={openModal} />
-              <DropdownItem setOpen={setOpen} Icon={CiLogout} text="Log Out" func={signOut} />
-            </>
-
-          ) : (
-          <>
-            {providers && (
-              <>
-                {Object.values(providers)?.map((provider) => (
-                  <DropdownItem
-                    key={provider.id}
-                    setOpen={setOpen}
-                    Icon={CiLogin}
-                    text={`Log in with ${provider.name}`}
-                    func={signIn}
-                    providerId={provider.id}
-                  />
-                ))}
-              </>
-            )}
-          </>
-        )}
-        </motion.ul>
-      </motion.div>
-      <AnimatePresence initial={false} wait>
-          {modalOpen && (
-            <NewRecipe
-              modalOpen={modalOpen}
-              handleClose={closeModal}
-            />
+              <Image
+              priority
+                width={37}
+                height={37}
+                src={session.user.image}
+                className="rounded-full"
+              />
+            ) : (
+            <FaRegUser variants={iconVariants} size={24} />
           )}
-        </AnimatePresence>
-    </>
+        </motion.span>
+      </button>
+
+      <motion.ul
+        initial={wrapperVariants.closed}
+        variants={wrapperVariants}
+        style={{ originY: "top", translateX: "-75%" }}
+        className="bg-primary flex z-10 flex-col gap-2 p-2 rounded-lg shadow-xl absolute top-[180%] w-48 overflow-hidden"
+      >
+        {session ? (
+          <>
+            <DropdownItem setOpen={setOpen} Icon={RxDashboard} text="Dashboard" />
+            <DropdownItem setOpen={setOpen} Icon={MdDateRange} text="Calendar" />
+            <DropdownItem setOpen={setOpen} Icon={FiPlusSquare} text="Create A Recipe" func={createRecipe} />
+            <DropdownItem setOpen={setOpen} Icon={CiLogout} text="Log Out" func={signOut} />
+          </>
+
+        ) : (
+        <>
+          {providers && (
+            <>
+              {Object.values(providers)?.map((provider) => (
+                <DropdownItem
+                  key={provider.id}
+                  setOpen={setOpen}
+                  Icon={CiLogin}
+                  text={`Log in with ${provider.name}`}
+                  func={signIn}
+                  providerId={provider.id}
+                />
+              ))}
+            </>
+          )}
+        </>
+      )}
+      </motion.ul>
+
+    </motion.div>
   );
 };
 

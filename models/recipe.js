@@ -10,6 +10,21 @@ const RecipeSchema = new Schema({
     type: String,
     required: [true, "Description is required"],
   },
+  instructions: {
+    type: String,
+    required: [true, "instructions are required"],
+  },
+  rate: {
+    type: Number,
+  },
+  servings: {
+    type: Number,
+    required: [true, "servings is required"],
+  },
+  prepTime: {
+    type: Number,
+    required: [true, "Preperation time is required"],
+  },
   image: {
     type: String,
   },

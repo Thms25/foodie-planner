@@ -18,3 +18,16 @@ export async function deleteRecipe(id) {
     throw new Error(error);
   }
 }
+
+export async function createRecipe(recipeData) {
+  try {
+    const res = await fetch(process.env.NEXT_PUBLIC_RECIPES, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(recipeData),
+    });
+    return res;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
