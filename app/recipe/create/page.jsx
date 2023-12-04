@@ -3,7 +3,10 @@
 // Hooks
 import { useRouter } from "next/navigation";
 
+// Components
 import NewRecipe from "@/components/Recipes/NewRecipe";
+
+// Utils
 import { createRecipe } from "@/utils/fetchUtils";
 
 export default function CreateRecipe() {
@@ -12,12 +15,12 @@ export default function CreateRecipe() {
   const handleSubmit = async (recipe) => {
     const res = await createRecipe(recipe);
     console.log(res);
-    if (res.ok) {
-      const { id } = await res.json();
-      router.push(`/recipe/${id}`);
-    } else {
-      console.log("error");
-    }
+    // if (res.ok) {
+    //   const { id } = await res.json();
+    //   router.push(`/recipe/${id}`);
+    // } else {
+    //   console.log("error");
+    // }
   };
   return (
     <section className="p-4">

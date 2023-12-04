@@ -1,6 +1,10 @@
 import { Schema, model, models } from "mongoose";
 
 const RecipeSchema = new Schema({
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   title: {
     type: String,
     unique: [true, "Recipe name already exists!"],
@@ -25,8 +29,12 @@ const RecipeSchema = new Schema({
     type: Number,
     required: [true, "Preperation time is required"],
   },
-  image: {
-    type: String,
+  // image: {
+  //   type: String,
+  // },
+  private: {
+    type: Boolean,
+    required: [true, "availability is required"],
   },
 });
 
