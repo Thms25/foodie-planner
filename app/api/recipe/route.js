@@ -1,27 +1,29 @@
+// Utils
 import { connectToDb } from "@/utils/databaseUtils";
 
 // Models
 import Recipe from "@/models/recipe";
-import User from "@/models/user";
-
-// Auth
-import { getServerSession } from "next-auth";
 
 export async function GET(request) {
-  return new Response("Hello from recipes");
+  try {
+    await connectToDb();
+
+    const recipes = await Recipe.find({});
+    console.log(recipes);
+
+    return new Response(JSON.stringify(recipes), { status: 201 });
+  } catch (error) {
+    return new Response("Failed to fetch recipes", { status: 500 });
+  }
 }
 
 export async function POST(request) {
   const recipeData = await request.json();
 
-  const { user } = await getServerSession();
-
-  const foundUser = await User.findOne({ email: user.email });
-
   try {
     await connectToDb();
     const newRecipe = new Recipe({
-      creator: foundUser._id,
+      creator: recipeData.userId,
       private: recipeData.private,
       title: recipeData.title,
       description: recipeData.description,

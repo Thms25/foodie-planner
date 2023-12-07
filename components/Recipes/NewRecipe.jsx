@@ -13,13 +13,25 @@ import Image from "next/image";
 import { upload } from "@/utils/svgData";
 
 export default function NewRecipe({ onSubnit }) {
-  const [recipeData, setRecipeData] = useState({
-    private: false,
-  });
   const [ingredientsData, setIngredientsData] = useState([]);
-  const [ingredient, setIngredient] = useState({});
+  const [recipeData, setRecipeData] = useState({
+    title: "",
+    description: "",
+    prepTime: 60,
+    servings: 4,
+    category: "",
+    instructions: "",
+    private: false,
+    ingredients: ingredientsData,
+  });
+  const [ingredient, setIngredient] = useState({
+    name: "",
+    qty: 1,
+    unit: "Kg",
+  });
 
   const foodCat = ["Other", "Italian", "Nordic", "Asian"];
+  const units = ["Kg", "Grams", "Piece", "L", "mL", "Tea Spoon", "Table Spoon"];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,11 +39,11 @@ export default function NewRecipe({ onSubnit }) {
   };
 
   return (
-    <div className="text-primary m-4 p-4 lg:p-16">
+    <div className="text-primary m-4 p-4 lg:p-12">
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="grid md:grid-cols-2 text-left">
           {/* recipe main */}
-          <section className="m-4">
+          <div className="m-4">
             <div className="relative z-0 w-full mb-5 group">
               <input
                 value={recipeData.title}
@@ -49,7 +61,7 @@ export default function NewRecipe({ onSubnit }) {
                 required
               />
               <label
-                for="recipe_name"
+                htmlFor="recipe_name"
                 className="z-10 peer-focus:font-medium absolute text-md text-gray-500 duration-300 transform translate-y-6 scale-75 top-3 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
                 Recipe name
@@ -72,7 +84,7 @@ export default function NewRecipe({ onSubnit }) {
                 required
               />
               <label
-                for="recipe_description"
+                htmlFor="recipe_description"
                 className="z-10 peer-focus:font-medium absolute text-md text-gray-500 duration-300 transform translate-y-6 scale-75 top-3 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
                 Description
@@ -96,7 +108,7 @@ export default function NewRecipe({ onSubnit }) {
                   required
                 />
                 <label
-                  for="recipe_prep_time"
+                  htmlFor="recipe_prep_time"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Prep Time
@@ -119,7 +131,7 @@ export default function NewRecipe({ onSubnit }) {
                   required
                 />
                 <label
-                  for="recipe_servings"
+                  htmlFor="recipe_servings"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Servings
@@ -127,7 +139,7 @@ export default function NewRecipe({ onSubnit }) {
               </div>
             </div>
             <div className="relative z-0 w-full mb-5 group">
-              <label for="recipe_category" class="sr-only">
+              <label htmlFor="recipe_category" className="sr-only">
                 Recipe Category
               </label>
               <select
@@ -143,11 +155,13 @@ export default function NewRecipe({ onSubnit }) {
                 placeholder=""
               >
                 {foodCat.map((cat) => (
-                  <option value={cat}>{cat}</option>
+                  <option value={cat} key={cat}>
+                    {cat}
+                  </option>
                 ))}
               </select>
             </div>
-            <div class="flex items-center mb-4">
+            <div className="flex items-center mb-4">
               <input
                 checked={recipeData.private}
                 id="recipe_privay"
@@ -162,7 +176,7 @@ export default function NewRecipe({ onSubnit }) {
                 className="w-4 h-4 text-primary border-primary rounded focus:outline-none"
               />
               <label
-                for="checkbox-1"
+                htmlFor="checkbox-1"
                 className="ms-2 text-sm font-medium hover:underline"
                 onClick={(e) => {
                   setRecipeData({
@@ -174,12 +188,12 @@ export default function NewRecipe({ onSubnit }) {
                 Keep the recipe just for me
               </label>
             </div>
-          </section>
+          </div>
 
           {/* image */}
           <div className="flex items-center justify-center m-4 relative">
             <label
-              for="dropzone-file"
+              htmlFor="dropzone-file"
               className="flex flex-col items-center justify-center w-full h-48 lg:h-96 rounded-lg cursor-pointer text-md lg:text-xl font-bold"
             >
               <div className="grid md:flex flex-col items-center justify-center md:py-6 z-10">
@@ -199,8 +213,8 @@ export default function NewRecipe({ onSubnit }) {
               width={1600}
               height={1600}
               src="https://images.unsplash.com/photo-1506159904226-d6cfd457c30c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8cGxhdGV8fHx8fHwxNzAxNjA3OTEx&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080"
-              lt="unsplah image"
-              className="object-contain absolute opacity-20 w-full h-full"
+              alt="unsplah image"
+              className="object-cover absolute opacity-20 w-full h-full"
             />
           </div>
 
@@ -225,7 +239,7 @@ export default function NewRecipe({ onSubnit }) {
                   required
                 />
                 <label
-                  for="ingredient_name"
+                  htmlFor="ingredient_name"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Ingredient
@@ -248,15 +262,17 @@ export default function NewRecipe({ onSubnit }) {
                   required
                 />
                 <label
-                  for="ingredient_qty"
+                  htmlFor="ingredient_qty"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Quantity
                 </label>
               </div>
               <div className="relative z-0 w-full mb-5 group">
-                <input
-                  type="text"
+                <label htmlFor="recipe_category" className="sr-only">
+                  Unit
+                </label>
+                <select
                   value={ingredient.unit}
                   onChange={(e) => {
                     setRecipeData({
@@ -264,18 +280,16 @@ export default function NewRecipe({ onSubnit }) {
                       unit: e.currentTarget.value,
                     });
                   }}
-                  name="recipe_servings"
-                  id="recipe_servings"
-                  className="block p-2 w-full text-sm text-gray-900 bg-light border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  id="recipe_category"
+                  className="block p-2 w-full text-sm bg-light border-0 border-b-2 border-primary appearance-none focus:outline-none peer"
                   placeholder=""
-                  required
-                />
-                <label
-                  for="recipe_servings"
-                  className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
-                  Unit
-                </label>
+                  {units.map((unit) => (
+                    <option value={unit} key={unit}>
+                      {unit}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <motion.button
@@ -290,7 +304,7 @@ export default function NewRecipe({ onSubnit }) {
           {/* instructions */}
           <div className="m-4 px-8">
             <label
-              for="recipe_instructions"
+              htmlFor="recipe_instructions"
               className="block my-2 text-sm font-medium"
             >
               Recipe Instructions

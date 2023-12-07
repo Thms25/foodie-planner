@@ -17,11 +17,11 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session }) {
-      const sessionUser = User.findOne({
+      const sessionUser = await User.findOne({
         email: session.user.email,
       });
 
-      // session.user.id = sessionUser._id.toString();
+      session.user.id = sessionUser._id.toString();
       return session;
     },
     async signIn({ profile }) {
@@ -42,7 +42,7 @@ const handler = NextAuth({
 
         return true;
       } catch (error) {
-        console.log(error);
+        console.error(error);
         return false;
       }
     },

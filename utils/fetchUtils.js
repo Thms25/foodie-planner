@@ -1,6 +1,15 @@
 export async function getRecipes() {
   try {
-    const res = await fetch(process.env.NEXT_PUBLIC_RECIPES);
+    const res = await fetch("/api/recipes");
+    return res;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function getRecipe(id) {
+  try {
+    const res = await fetch(`/api/recipes/${id}`);
     return res;
   } catch (error) {
     throw new Error(error);

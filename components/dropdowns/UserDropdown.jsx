@@ -10,29 +10,31 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Hooks
 import { useState, useEffect } from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 // Components
 import Image from "next/image";
 
 // Auth
-import { getProviders } from 'next-auth/react';
+import { getProviders } from "next-auth/react";
 import { signIn, signOut } from "next-auth/react";
 
-export default function UserDropdown ({ session }) {
+export default function UserDropdown({ session }) {
   const [providers, setProviders] = useState(null);
   const [open, setOpen] = useState(false);
 
   const router = useRouter();
-  const createRecipe = () => router.push('/recipe/create');
+  const createRecipe = () => router.push("/recipe/create");
+  const toDashboard = () => router.push("/dashboard");
+  const toCalendar = () => router.push("/calendar");
 
   useEffect(() => {
     async function settingProviders() {
-      const res = await getProviders()
-      setProviders(res)
+      const res = await getProviders();
+      setProviders(res);
     }
 
-    settingProviders()
+    settingProviders();
   }, []);
 
   return (
@@ -43,14 +45,15 @@ export default function UserDropdown ({ session }) {
       >
         <motion.span>
           {session ? (
-              <Image
+            <Image
               priority
-                width={37}
-                height={37}
-                src={session.user.image}
-                className="rounded-full"
-              />
-            ) : (
+              width={37}
+              height={37}
+              src={session.user.image}
+              className="rounded-full"
+              alt="user logo"
+            />
+          ) : (
             <FaRegUser variants={iconVariants} size={24} />
           )}
         </motion.span>
@@ -64,35 +67,53 @@ export default function UserDropdown ({ session }) {
       >
         {session ? (
           <>
-            <DropdownItem setOpen={setOpen} Icon={RxDashboard} text="Dashboard" />
-            <DropdownItem setOpen={setOpen} Icon={MdDateRange} text="Calendar" />
-            <DropdownItem setOpen={setOpen} Icon={FiPlusSquare} text="Create A Recipe" func={createRecipe} />
-            <DropdownItem setOpen={setOpen} Icon={CiLogout} text="Log Out" func={signOut} />
+            <DropdownItem
+              setOpen={setOpen}
+              Icon={RxDashboard}
+              text="Dashboard"
+              func={toDashboard}
+            />
+            <DropdownItem
+              setOpen={setOpen}
+              Icon={MdDateRange}
+              text="Calendar"
+              func={toCalendar}
+            />
+            <DropdownItem
+              setOpen={setOpen}
+              Icon={FiPlusSquare}
+              text="Create A Recipe"
+              func={createRecipe}
+            />
+            <DropdownItem
+              setOpen={setOpen}
+              Icon={CiLogout}
+              text="Log Out"
+              func={signOut}
+            />
           </>
-
         ) : (
-        <>
-          {providers && (
-            <>
-              {Object.values(providers)?.map((provider) => (
-                <DropdownItem
-                  key={provider.id}
-                  setOpen={setOpen}
-                  Icon={CiLogin}
-                  text={`Log in with ${provider.name}`}
-                  func={signIn}
-                  providerId={provider.id}
-                />
-              ))}
-            </>
-          )}
-        </>
-      )}
+          <>
+            {providers && (
+              <>
+                {Object.values(providers)?.map((provider) => (
+                  <DropdownItem
+                    key={provider.id}
+                    setOpen={setOpen}
+                    Icon={CiLogin}
+                    text={`Log in with ${provider.name}`}
+                    func={signIn}
+                    providerId={provider.id}
+                  />
+                ))}
+              </>
+            )}
+          </>
+        )}
       </motion.ul>
-
     </motion.div>
   );
-};
+}
 
 const DropdownItem = ({ text, Icon, setOpen, func, providerId }) => {
   return (
@@ -101,7 +122,7 @@ const DropdownItem = ({ text, Icon, setOpen, func, providerId }) => {
       onClick={() => {
         setOpen(false);
         if (func) {
-          providerId ? func(providerId) : func()
+          providerId ? func(providerId) : func();
         }
       }}
       className="flex items-center gap-2 w-full p-2 text-sm font-medium whitespace-nowrap rounded-md hover:bg-light text-slate-700 hover:text-primary transition-colors cursor-pointer"

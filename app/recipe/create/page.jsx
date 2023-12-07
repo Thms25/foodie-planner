@@ -3,6 +3,9 @@
 // Hooks
 import { useRouter } from "next/navigation";
 
+// Auth
+import { useSession } from "next-auth/react";
+
 // Components
 import NewRecipe from "@/components/Recipes/NewRecipe";
 
@@ -11,16 +14,20 @@ import { createRecipe } from "@/utils/fetchUtils";
 
 export default function CreateRecipe() {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const handleSubmit = async (recipe) => {
-    const res = await createRecipe(recipe);
-    console.log(res);
-    // if (res.ok) {
-    //   const { id } = await res.json();
-    //   router.push(`/recipe/${id}`);
-    // } else {
-    //   console.log("error");
-    // }
+    const recipeWithUser = { ...recipe, userId: session?.user.id };
+    const res = await createRecipe(recipeWithUser);
+
+    if (res.ok) {
+      const { id } = await res.json();
+      console.log(res);
+      console.log(id);
+      // router.push(`/`);
+    } else {
+      console.error("could not create recipe...");
+    }
   };
   return (
     <section className="p-4">
