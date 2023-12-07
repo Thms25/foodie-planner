@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { arrowRight } from "@/utils/svgData";
 import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
@@ -8,28 +8,28 @@ const categories = [
   {
     title: "Top Of The Month",
     sub: "Browse through what all of you prefered this month",
-    link: "#"
+    link: "#",
   },
   {
     title: "Recipes Of The Season",
     sub: "Get inspired to eat according to the weather",
-    link: "#"
+    link: "#",
   },
   {
     title: "Most Cooked Recipes",
     sub: "hello, description tba",
-    link: "#"
+    link: "#",
   },
   {
     title: "Vegetarian Corner",
     sub: "Fin the best recipes with no animals on the memnu",
-    link: "#"
+    link: "#",
   },
-]
+];
 
-export default function CategoriesDropdown () {
+export default function CategoriesDropdown({ className }) {
   return (
-    <section className="p-4 md:p-8">
+    <section className={className}>
       <div className="mx-4 max-w-3xl">
         {categories.map((cat, index) => (
           <Link
@@ -43,7 +43,6 @@ export default function CategoriesDropdown () {
     </section>
   );
 }
-
 
 const Link = ({ heading, imgSrc, subheading, href }) => {
   const ref = useRef(null);
@@ -74,7 +73,7 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
       onMouseMove={handleMouseMove}
       initial="initial"
       whileHover="whileHover"
-      className="group relative flex items-center justify-between border-b-2 border-neutral-700 py-4 transition-colors duration-500 hover:border-neutral-50 md:py-8"
+      className="text-left group relative flex items-center justify-between border-b-2 border-neutral-700 py-3  md:py-8 transition-colors duration-400 hover:border-neutral-50"
     >
       <div>
         <motion.span
@@ -83,20 +82,15 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
             whileHover: { x: -10 },
           }}
           transition={{
-            type: "spring",
-            damping: 40,
+            type: "EaseIn",
             staggerChildren: 0.075,
-            delayChildren: 0.15,
+            delayChildren: 0.1,
           }}
-          className="relative z-10 block text-xl font-bold text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50 md:text-4xl"
+          className="relative z-10 block text-xl font-bold text-neutral-400 transition-colors duration-500 group-hover:text-neutral-50 md:text-3xl"
         >
-          <span
-            className="inline-block"
-          >
-            {heading}
-          </span>
+          <span className="inline-block">{heading}</span>
         </motion.span>
-        <span className="relative z-10 mt-2 block text-base text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50">
+        <span className="text-md md:text-xl relative z-10 mt-2 block text-base text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50">
           {subheading}
         </span>
       </div>
@@ -113,9 +107,9 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
           },
         }}
         transition={{ type: "spring" }}
-        className="relative z-10 p-2"
+        className="relative z-10"
       >
-        <div className="text-black-800 w-14 h-14 " >{arrowRight}</div>
+        <div className="text-black-800 w-10 h-10 ">{arrowRight}</div>
       </motion.div>
     </motion.a>
   );

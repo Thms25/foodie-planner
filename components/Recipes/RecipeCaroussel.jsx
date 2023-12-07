@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useMotionValueEvent } from "framer-motion";
@@ -23,7 +23,7 @@ const SPRING_OPTIONS = {
   damping: 50,
 };
 
-export default function RecipeCaroussel ({ recipes }) {
+export default function RecipeCaroussel({ recipes }) {
   const [dragging, setDragging] = useState(false);
 
   const [imgIndex, setImgIndex] = useState(0);
@@ -73,7 +73,7 @@ export default function RecipeCaroussel ({ recipes }) {
   };
 
   return (
-    <div className="relative h-full w-full lg:max-w-1/2 overflow-hidden p-8">
+    <div className="relative h-full w-full overflow-hidden p-2">
       <motion.div
         drag="x"
         dragConstraints={{
@@ -104,18 +104,16 @@ export default function RecipeCaroussel ({ recipes }) {
               }}
               transition={SPRING_OPTIONS}
               key={idx}
-              className="w-full shrink-0 rounded-xl object-contain aspect-video shadow-xl"
+              className="w-full shrink-0 rounded-xl aspect-video shadow-lg"
             />
           );
         })}
       </motion.div>
 
       <Dots setImgIndex={setImgIndex} imgIndex={imgIndex} />
-
-      <GradientEdges />
     </div>
   );
-};
+}
 
 const Dots = ({ setImgIndex, imgIndex }) => {
   return (
@@ -134,10 +132,3 @@ const Dots = ({ setImgIndex, imgIndex }) => {
     </div>
   );
 };
-
-const GradientEdges = () => (
-  <>
-    <div className="pointer-events-none absolute bottom-0 left-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-r from-neutral-950/50 to-neutral-950/0" />
-    <div className="pointer-events-none absolute bottom-0 right-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-l from-neutral-950/50 to-neutral-950/0" />
-  </>
-);

@@ -1,22 +1,19 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import RecipeCard from "./RecipeCard";
-import styles from "styles/recipes.module.scss";
+import { useEffect, useState } from "react";
 
 // Utils
-import { getRecipes, deleteRecipe } from '@/utils/fetchUtils';
-import { fakeRecipes } from '@/utils/fakeData/fakeRecipes';
-import RecipeCaroussel from './RecipeCaroussel';
+import { getRecipes, deleteRecipe } from "@/utils/fetchUtils";
+import { fakeRecipes } from "@/utils/fakeData/fakeRecipes";
+import RecipeCaroussel from "./RecipeCaroussel";
 
-
-export default function Recipes () {
+export default function Recipes({ className }) {
   const [recipes, setRecipes] = useState([]);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleDeleteRecipe = async (id) => {
     try {
-      const res = await deleteRecipe(id)
+      const res = await deleteRecipe(id);
       if (res.ok) {
         setRecipes(recipes.filter((recipe) => recipe.id !== id));
       } else {
@@ -25,7 +22,7 @@ export default function Recipes () {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
     // async function fetchRecipes() {
@@ -36,16 +33,21 @@ export default function Recipes () {
     // fetchRecipes();
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 250);
   }, []);
 
   return (
-    <>
+    <div className={className}>
       {isLoading ? (
-        <h1 className='animate-pulse text-4xl m-auto p-24 font-bold'>Loading...</h1>
+        <h1 className="animate-pulse text-4xl m-auto p-24 font-bold">
+          Loading Recipes...
+        </h1>
       ) : (
-        <RecipeCaroussel recipes={fakeRecipes}/>
+        <div className="p-12 text center">
+          <h3 className="text-2xl tracking-wide">Suggestions of the day</h3>
+          <RecipeCaroussel recipes={fakeRecipes} />
+        </div>
       )}
-    </>
-  )
-};
+    </div>
+  );
+}
