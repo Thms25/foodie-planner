@@ -1,10 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    appDir: true,
+    serverComponentsExternalPackages: ["mongoose"],
+  },
   images: {
-    // loader: "cloudinary",
-    // reactStrictMode: true,
-    domains: ["res.cloudinary.com"],
-    // path: "https://res.cloudinary.com/<cloudinary-id>/image/upload",
+    domains: ["lh3.googleusercontent.com", "images.unsplash.com"],
+  },
+  webpack(config) {
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    };
+    return config;
   },
 };
 

@@ -1,120 +1,59 @@
-// 'use client'
+// Utils
+import { getRecipe } from "@/utils/fetchUtils";
 
-// import { useState, useEffect } from 'react';
-import styles from 'styles/recipePage.module.scss'
-import EditRecipe from "@/components/EditRecipe";
-// import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+// Components
+import Image from "next/image";
 
-
-
-async function fetchRecipe(id) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`);
-  const data = await res.json();
-  return data;
-}
-
-export default async function Page ({ params }) {
-  // const [recipe, setRecipe] = useState({})
-  // const [edit, setEdit] = useState(false)
-  // const [recipeFetched, setRecipeFetched] = useState(false)
-  const recipe = await fetchRecipe(params.recipeId);
-
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   async function getRecipe() {
-  //     const myRecipe = await fetchRecipe(params.recipeId)
-  //     setRecipe(myRecipe)
-  //     setRecipeFetched(true);
-  //   }
-  //   getRecipe();
-  // }, []);
-
-  // const handleEditRecipe = async (id, body) => {
-  //   const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`, {
-  //     method: 'PUT',
-  //     headers: {"Content-Type": "application/json"},
-  //     body: JSON.stringify(body)
-  //   })
-  //   if (res.ok) {
-  //     console.log("form submitted succesfully !")
-  //     setRecipe(body)
-  //     setEdit(false)
-  //   } else {
-  //     console.log('error')
-  //   }
-  // }
-
-  // const deleteRecipe =  async (id) => {
-  //   try {
-  //     const res = await fetch(`${process.env.NEXT_PUBLIC_RECIPES}/${id}`, {
-  //       method: 'DELETE',
-  //     })
-  //     if (res.ok) {
-  //       console.log("recipe deleted")
-  //       // router.push('/');
-  //     } else {
-  //       console.log("error");
-  //       throw res;
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+export default async function Page({ params }) {
+  const recipeData = await getRecipe(params.recipeId);
 
   return (
-    <div>
-      <div className={styles.recipePage}>
-        <div className={styles.recipeLeft}>
-          <div className={styles.recipeInfo}>
-            <h2 className={styles.title}>{recipe.title}</h2>
-            <div className={styles.data}>
-              <p>preps: <span>{recipe.prep_time}</span></p>
-              <p>servings: <span>{recipe.servings}</span></p>
-              <p className='btn'>Add to calendar</p>
-            </div>
-            <div className={styles.nutritions}>
-              <ul>
-                <li>nutri <p>value</p></li>
-                <li>nutri <p>value</p></li>
-                <li>nutri <p>value</p></li>
-                <li>nutri <p>value</p></li>
-                <li>nutri <p>value</p></li>
-              </ul>
-            </div>
-          </div>
-          <div className={styles.inregidents}>
-            <h5>Ingredients</h5>
-            <ul>
-              <li>this is and ingredient - quantity</li>
-              <li>this is and ingredient - quantity</li>
-              <li>this is and ingredient - quantity</li>
-              <li>this is and ingredient - quantity</li>
-              <li>this is and ingredient - quantity</li>
-            </ul>
+    <section className="text-primary m-4 p-4 lg:p-12">
+      <div className="grid md:grid-cols-2 text-left">
+        {/* recipe main */}
+        <div className="m-4">
+          <div className="mb-5">
+            <h2 className="text-2xl font-bold">{recipeData.title}</h2>
+            <p className="text-gray-600 mb-3">{recipeData.description}</p>
+            <p className="text-gray-600 mb-3">{recipeData.prepTime}</p>
+            <p className="text-gray-600 mb-3">{recipeData.servings}</p>
+            <p className="text-gray-600 mb-3">{recipeData.category}</p>
           </div>
         </div>
-        <div className={styles.recipeRight}>
+
+        {/* image */}
+        <div className="flex items-center justify-center m-4 relative">
           <Image
-            src={recipe.photo_url}
-            alt={recipe.title}
-            width={480}
-            height={360}
-            crop='fill'
-            className={styles.img}
+            src="https://images.unsplash.com/photo-1580959367188-956b3b6c389d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=1200&ixid=MnwxfDB8MXxyYW5kb218MHx8cGVzdG98fHx8fHwxNzAxOTc1NTA1&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1600"
+            alt="Recipe Image"
+            className="w-full h-auto shadow-sm"
+            width={1600}
+            height={1200}
           />
-          <div className={styles.instructions}>
-            <h5>Instructions</h5>
-            <p>{recipe.description}</p>
+        </div>
+
+        {/* ingredients */}
+        <div className="m-4">
+          {/* <h1 className="text-xl mb-4 underline">Ingredients</h1>
+          <div className="mb-5">
+            {recipeData.ingredients.map((ingredient, index) => (
+              <div key={index} className="text-gray-600 mb-3">
+                <p>Ingredient: {ingredient.name}</p>
+                <p>Quantity: {ingredient.qty}</p>
+                <p>Unit: {ingredient.unit}</p>
+              </div>
+            ))}
+          </div> */}
+        </div>
+
+        {/* instructions */}
+        <div className="m-4 px-8">
+          <div className="mb-5">
+            <h2 className="text-xl font-bold mb-2">Recipe Instructions</h2>
+            <p className="text-gray-600">{recipeData.instructions}</p>
           </div>
         </div>
       </div>
-      {/* {edit && (
-        <EditRecipe recipe={recipe} editRecipe={handleEditRecipe} />
-        )} */}
-    </div>
+    </section>
   );
 }
-{/* <button onClick={() => setEdit(true)}>EDIT</button>
-<button onClick={() => deleteRecipe(recipe.id)}>DELETE</button> */}

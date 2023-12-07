@@ -1,21 +1,20 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import styles from '../styles/navbar.module.scss';
-import Link from 'next/link';
+// Hooks
+import Link from "next/link";
+
+// Style
+import styles from "../styles/navbar.module.scss";
+// Anmations
+import { motion, AnimatePresence } from "framer-motion";
+
+// Components
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMagnifyingGlass,
-  faUser
-} from "@fortawesome/free-solid-svg-icons";
-import { motion, AnimatePresence } from 'framer-motion';
-import NewRecipe from "@/components/NewRecipe";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import NewRecipe from "@/components/Recipes/NewRecipe";
+import UserDropdown from "./dropdowns/UserDropdown";
 
-const Navbar = () => {
-  const [modalOpen, setModaOpen] = useState(false);
-  const close = () => setModaOpen(false);
-  const open = () => setModaOpen(true);
-
+export default function Navbar({ session }) {
   return (
     <>
       <nav className={styles.navbar}>
@@ -24,29 +23,21 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 3 }}
+            className="text-3xl"
           >
             Foodie Planner
           </motion.h2>
         </Link>
         <div className={styles.searchBar}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
-          <input type="text" placeholder='Search for something...' className={styles.searchInput} />
+          <input
+            type="text"
+            placeholder="Search for something..."
+            className={styles.searchInput}
+          />
         </div>
-        <FontAwesomeIcon
-          onClick={() => open()}
-          icon={faUser}
-          className={styles.userIcon}
-        />
+        <UserDropdown session={session} />
       </nav>
-      <div>
-        <AnimatePresence initial={false} mode="wait">
-          {modalOpen && (
-            <NewRecipe modalOpen={modalOpen} handleClose={close} />
-          )}
-        </AnimatePresence>
-      </div>
     </>
   );
 }
-
-export default Navbar;
