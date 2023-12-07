@@ -3,6 +3,7 @@ import Recipes from "@/components/Recipes/Recipes";
 import Calendar from "@/components/HomeCalendar";
 import Banner from "@/components/Banner";
 import CategoriesDropdown from "@/components/dropdowns/CategoriesDropdown";
+import { getRecipes } from "@/utils/fetchUtils";
 
 export default function Home() {
   return (

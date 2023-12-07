@@ -21,10 +21,11 @@ export default function CreateRecipe() {
     const res = await createRecipe(recipeWithUser);
 
     if (res.ok) {
-      const { id } = await res.json();
-      console.log(res);
-      console.log(id);
-      // router.push(`/`);
+      const data = await res.json();
+      console.log(data);
+      const { _id: id } = data;
+
+      router.push(`/recipe/${id}`);
     } else {
       console.error("could not create recipe...");
     }

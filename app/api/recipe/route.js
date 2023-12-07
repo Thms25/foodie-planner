@@ -20,6 +20,8 @@ export async function GET(request) {
 export async function POST(request) {
   const recipeData = await request.json();
 
+  console.log(recipeData);
+
   try {
     await connectToDb();
     const newRecipe = new Recipe({
