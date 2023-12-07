@@ -9,7 +9,6 @@ export async function GET(request) {
     await connectToDb();
 
     const recipes = await Recipe.find({});
-    console.log(recipes);
 
     return new Response(JSON.stringify(recipes), { status: 201 });
   } catch (error) {
