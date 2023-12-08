@@ -1,4 +1,4 @@
-import { getRecipes } from "@/utils/fetchUtils";
+import { getRecipes } from "@/utils/fetchUtils/recipeFetchUtils";
 import Image from "next/image";
 import Link from "next/link";
 

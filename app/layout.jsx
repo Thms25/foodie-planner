@@ -1,8 +1,5 @@
 // Styles
-import '../styles/globals.scss'
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false;
+import "../styles/globals.scss";
 
 // Components
 import Navbar from "@/components/Navbar";
@@ -17,13 +14,13 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession()
+  const session = await getServerSession();
 
   return (
     <html>
       <body>
         <Provider>
-          <Navbar session={session}/>
+          <Navbar session={session} />
           {children}
         </Provider>
       </body>

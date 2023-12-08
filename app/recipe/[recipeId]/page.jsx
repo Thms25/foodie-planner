@@ -1,14 +1,44 @@
+"use client";
+
 // Utils
-import { getRecipe } from "@/utils/fetchUtils";
+import { deleteRecipe, getRecipe } from "@/utils/fetchUtils/recipeFetchUtils";
 
 // Components
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default async function Page({ params }) {
-  const recipeData = await getRecipe(params.recipeId);
+export default function Page({ params }) {
+  const router = useRouter();
+  const [recipeData, setRecipeData] = useState({});
+  useEffect(() => {
+    async function fetchRecipe(id) {
+      const data = await getRecipe(id);
+      setRecipeData(data);
+    }
+    fetchRecipe(params.recipeId);
+  }, [params]);
+
+  const handleDelete = async () => {
+    const hasConfirmed = confirm("Are you sure ?");
+    if (hasConfirmed) {
+      const res = await deleteRecipe(params.recipeId);
+      if (res.ok) {
+        router.push("/dashboard");
+      }
+    }
+  };
 
   return (
     <section className="text-primary m-4 p-4 lg:p-12">
+      <button
+        onClick={() => handleDelete()}
+        disabled={false}
+        type="button"
+        className={`py-2 px-4 text-sm font-medium text-primary focus:outline-none  rounded-full border border-primary shadow-sm hover:shadow-md transition duration-300 ml-4 `}
+      >
+        Delete Recipe
+      </button>
       <div className="grid md:grid-cols-2 text-left">
         {/* recipe main */}
         <div className="m-4">
@@ -29,21 +59,22 @@ export default async function Page({ params }) {
             className="w-full h-auto shadow-sm"
             width={1600}
             height={1200}
+            priority
           />
         </div>
 
         {/* ingredients */}
         <div className="m-4">
           {/* <h1 className="text-xl mb-4 underline">Ingredients</h1>
-          <div className="mb-5">
-            {recipeData.ingredients.map((ingredient, index) => (
-              <div key={index} className="text-gray-600 mb-3">
-                <p>Ingredient: {ingredient.name}</p>
-                <p>Quantity: {ingredient.qty}</p>
-                <p>Unit: {ingredient.unit}</p>
-              </div>
-            ))}
-          </div> */}
+            <div className="mb-5">
+              {recipeData.ingredients.map((ingredient, index) => (
+                <div key={index} className="text-gray-600 mb-3">
+                  <p>Ingredient: {ingredient.name}</p>
+                  <p>Quantity: {ingredient.qty}</p>
+                  <p>Unit: {ingredient.unit}</p>
+                </div>
+              ))}
+            </div> */}
         </div>
 
         {/* instructions */}
