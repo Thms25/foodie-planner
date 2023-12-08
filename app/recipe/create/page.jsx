@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 import NewRecipe from "@/components/Recipes/NewRecipe";
 
 // Utils
-import { createRecipe } from "@/utils/fetchUtils";
+import { createRecipe } from "@/utils/fetchUtils/recipeFetchUtils";
 
 export default function CreateRecipe() {
   const router = useRouter();

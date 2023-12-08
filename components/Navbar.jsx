@@ -9,8 +9,7 @@ import styles from "../styles/navbar.module.scss";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Components
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { CiSearch } from "react-icons/ci";
 import NewRecipe from "@/components/Recipes/NewRecipe";
 import UserDropdown from "./dropdowns/UserDropdown";
 
@@ -29,7 +28,7 @@ export default function Navbar({ session }) {
           </motion.h2>
         </Link>
         <div className={styles.searchBar}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
+          <CiSearch />
           <input
             type="text"
             placeholder="Search for something..."

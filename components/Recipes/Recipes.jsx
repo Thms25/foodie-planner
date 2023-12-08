@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 // Utils
-import { getRecipes, deleteRecipe } from "@/utils/fetchUtils";
+import { getRecipes, deleteRecipe } from "@/utils/fetchUtils/recipeFetchUtils";
 import { fakeRecipes } from "@/utils/fakeData/fakeRecipes";
 import RecipeCaroussel from "./RecipeCaroussel";
 

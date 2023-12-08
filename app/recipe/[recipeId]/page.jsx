@@ -1,5 +1,5 @@
 // Utils
-import { getRecipe } from "@/utils/fetchUtils";
+import { getRecipe } from "@/utils/fetchUtils/recipeFetchUtils";
 
 // Components
 import Image from "next/image";
