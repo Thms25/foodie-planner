@@ -28,7 +28,7 @@ export async function createRecipe(recipeData) {
 
 export async function getRecipe(id) {
   try {
-    const res = await fetch(`${URL}/api/recipe/${id}`);
+    const res = await fetch(`/api/recipe/${id}`);
     const data = await res.json();
     return data;
   } catch (error) {
@@ -55,8 +55,7 @@ export async function deleteRecipe(id) {
     const res = await fetch(`/api/recipe/${id}`, {
       method: "DELETE",
     });
-    const data = await res.json();
-    return data;
+    return res;
   } catch (error) {
     throw new Error(error);
   }

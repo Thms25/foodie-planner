@@ -40,9 +40,11 @@ export async function DELETE(request, { params }) {
   try {
     await connectToDb();
 
-    await Recipe.findByIdAndRemove(params.recipeId);
+    const deletedRecipe = await Recipe.findOneAndDelete({
+      _id: params.recipeId,
+    });
 
-    return new Response("Recipe successfully deleted", { status: 201 });
+    return new Response("Recipe successfully deleted", { status: 200 });
   } catch (error) {
     return new Response("Failed to delete recipe", { status: 500 });
   }

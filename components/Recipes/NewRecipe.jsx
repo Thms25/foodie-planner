@@ -11,6 +11,7 @@ import Image from "next/image";
 
 // Utils
 import { upload } from "@/utils/svgData";
+import { randomImage } from "@/utils/fetchUtils/fetchUnsplash";
 
 export default function NewRecipe({ onSubnit }) {
   const [ingredientsData, setIngredientsData] = useState([]);
@@ -29,6 +30,10 @@ export default function NewRecipe({ onSubnit }) {
     qty: 1,
     unit: "Kg",
   });
+  const unsplashImg =
+    "https://images.unsplash.com/photo-1506159904226-d6cfd457c30c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8cGxhdGV8fHx8fHwxNzAxNjA3OTEx&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080";
+  const [imgUrl, setImgUrl] = useState(unsplashImg);
+  const [loadingImg, setLoadingImg] = useState(false);
 
   const foodCat = ["Other", "Italian", "Nordic", "Asian"];
   const units = ["Kg", "Grams", "Piece", "L", "mL", "Tea Spoon", "Table Spoon"];
@@ -36,6 +41,13 @@ export default function NewRecipe({ onSubnit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubnit(recipeData);
+  };
+
+  const generateImage = async (word) => {
+    setLoadingImg(true);
+    const url = await randomImage(recipeData.title);
+    setImgUrl(url);
+    setLoadingImg(false);
   };
 
   return (
@@ -191,30 +203,39 @@ export default function NewRecipe({ onSubnit }) {
           </div>
 
           {/* image */}
-          <div className="flex items-center justify-center m-4 relative">
+          <div className="flex items-end justify-center m-4 relative">
             <label
               htmlFor="dropzone-file"
               className="flex flex-col items-center justify-center w-full h-48 lg:h-96 rounded-lg cursor-pointer text-md lg:text-xl font-bold"
             >
-              <div className="grid md:flex flex-col items-center justify-center md:py-6 z-10">
+              <div className="grid md:flex items-center justify-center md:py-6 z-10">
                 <div className="w-12 h-12">{upload}</div>
-                <p className="hidden md:block mb-2">
-                  <span className="font-semibold">Click to upload</span> or drag
-                  and drop
-                </p>
-                <p className="hidden md:block">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
-                </p>
+                <button
+                  disabled={recipeData.title === ""}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    generateImage("bolognese");
+                  }}
+                  type="button"
+                  className={`py-2 px-4 text-sm font-medium text-primary focus:outline-none  rounded-full border border-primary shadow-sm hover:shadow-md transition duration-300 z-10 ml-4 ${
+                    recipeData.title === "" ? "hidden" : ""
+                  }`}
+                >
+                  Generate Image
+                </button>
               </div>
+
               <input id="dropzone-file" type="file" className="hidden" />
             </label>
             <Image
               priority
               width={1600}
               height={1600}
-              src="https://images.unsplash.com/photo-1506159904226-d6cfd457c30c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8cGxhdGV8fHx8fHwxNzAxNjA3OTEx&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080"
+              src={imgUrl}
               alt="unsplah image"
-              className="object-cover absolute opacity-20 w-full h-full"
+              className={`object-cover absolute w-full h-full ${
+                imgUrl === unsplashImg ? "opacity-20" : ""
+              } ${loadingImg ? "animate-pulse" : ""}`}
             />
           </div>
 
@@ -302,10 +323,10 @@ export default function NewRecipe({ onSubnit }) {
           </div>
 
           {/* instructions */}
-          <div className="m-4 px-8">
+          <div className="md:m-4 px-4 md:px-8">
             <label
               htmlFor="recipe_instructions"
-              className="block my-2 text-sm font-medium"
+              className="block my-2 text-md font-medium"
             >
               Recipe Instructions
             </label>
@@ -320,7 +341,7 @@ export default function NewRecipe({ onSubnit }) {
               required
               id="recipe_instructions"
               rows="8"
-              className="block p-2 w-full text-sm bg-light rounded-lg border border-primary focus:outline-none placeholder:text-primary"
+              className="block p-2 w-full text-md bg-light rounded-lg border border-primary focus:outline-none placeholder:text-primary"
               placeholder="Enter instructions here..."
             ></textarea>
           </div>
